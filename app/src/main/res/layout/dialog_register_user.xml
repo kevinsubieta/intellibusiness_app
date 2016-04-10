@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:id="@+id/scrollView"
+        android:fillViewport="true"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:visibility="visible"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:scrollbars="vertical"
+            android:scrollbarAlwaysDrawVerticalTrack="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dialog_register_user_tvUserName"
+                android:id="@+id/tvUserName"
+                android:layout_marginTop="48dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/etUserName"
+                android:layout_alignStart="@+id/etUserName" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text=""
+                android:ems="10"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:id="@+id/etUserName"
+                android:layout_below="@+id/tvUserName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dialog_register_user_tvName"
+                android:id="@+id/tvName"
+                android:layout_below="@+id/etUserName"
+                android:layout_alignLeft="@+id/etUserName"
+                android:layout_alignStart="@+id/etUserName" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:ems="10"
+                android:id="@+id/editText"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/tvName"
+                android:layout_alignLeft="@+id/tvName"
+                android:layout_alignStart="@+id/tvName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dialog_register_user_tvLastName"
+                android:id="@+id/tvLastName"
+                android:layout_below="@+id/editText"
+                android:layout_alignLeft="@+id/editText"
+                android:layout_alignStart="@+id/editText" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:ems="10"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/editText2"
+                android:layout_below="@+id/tvLastName"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dialog_register_user_tvEmail"
+                android:id="@+id/tvPassword"
+                android:layout_below="@+id/editText2"
+                android:layout_alignLeft="@+id/editText2"
+                android:layout_alignStart="@+id/editText2" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/editText3"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/tvPassword"
+                android:layout_alignLeft="@+id/tvPassword"
+                android:layout_alignStart="@+id/tvPassword" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dialog_register_user_tvTelephone"
+                android:id="@+id/tvTelephone"
+                android:layout_below="@+id/editText3"
+                android:layout_alignLeft="@+id/editText3"
+                android:layout_alignStart="@+id/editText3" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/editText4"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/tvTelephone"
+                android:layout_alignLeft="@+id/tvTelephone"
+                android:layout_alignStart="@+id/tvTelephone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dialog_register_user_tvAddress"
+                android:id="@+id/tvAddress"
+                android:layout_below="@+id/editText4"
+                android:layout_alignLeft="@+id/editText4"
+                android:layout_alignStart="@+id/editText4" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:ems="10"
+                android:id="@+id/editText5"
+                android:layout_marginRight="30dp"
+                android:layout_below="@+id/tvAddress"
+                android:layout_alignLeft="@+id/tvAddress"
+                android:layout_alignStart="@+id/tvAddress" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dialog_register_user_tvPassword"
+                android:id="@+id/tvPass"
+                android:layout_below="@+id/editText5"
+                android:layout_alignLeft="@+id/editText5"
+                android:layout_alignStart="@+id/editText5" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/editText6"
+                android:layout_below="@+id/tvPass"
+                android:layout_marginRight="30dp"
+                android:layout_alignLeft="@+id/tvPass"
+                android:layout_alignStart="@+id/tvPass" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dialog_register_user_tvRepeatPassword"
+                android:id="@+id/tvRepeatPass"
+                android:layout_below="@+id/editText6"
+                android:layout_alignLeft="@+id/editText6"
+                android:layout_alignStart="@+id/editText6" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/editText7"
+                android:layout_below="@+id/tvRepeatPass"
+                android:layout_marginRight="30dp"
+                android:layout_alignLeft="@+id/tvRepeatPass"
+                android:layout_alignStart="@+id/tvRepeatPass"
+                android:layout_weight="1" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+</LinearLayout>
