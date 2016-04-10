@@ -19,6 +19,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:scrollbars="vertical"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
             android:scrollbarAlwaysDrawVerticalTrack="true">
 
             <TextView
@@ -38,8 +40,6 @@
                 android:inputType="textPersonName"
                 android:text=""
                 android:ems="10"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
                 android:id="@+id/etUserName"
                 android:layout_below="@+id/tvUserName" />
 
@@ -49,6 +49,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/dialog_register_user_tvName"
                 android:id="@+id/tvName"
+                android:layout_marginTop="5dp"
                 android:layout_below="@+id/etUserName"
                 android:layout_alignLeft="@+id/etUserName"
                 android:layout_alignStart="@+id/etUserName" />
@@ -59,8 +60,7 @@
                 android:inputType="textPersonName"
                 android:text="Name"
                 android:ems="10"
-                android:id="@+id/editText"
-                android:layout_marginRight="30dp"
+                android:id="@+id/etName"
                 android:layout_below="@+id/tvName"
                 android:layout_alignLeft="@+id/tvName"
                 android:layout_alignStart="@+id/tvName" />
@@ -71,9 +71,10 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/dialog_register_user_tvLastName"
                 android:id="@+id/tvLastName"
-                android:layout_below="@+id/editText"
-                android:layout_alignLeft="@+id/editText"
-                android:layout_alignStart="@+id/editText" />
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/etName"
+                android:layout_alignLeft="@+id/etName"
+                android:layout_alignStart="@+id/etName" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -81,9 +82,7 @@
                 android:inputType="textPersonName"
                 android:text="Name"
                 android:ems="10"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:id="@+id/editText2"
+                android:id="@+id/etLastName"
                 android:layout_below="@+id/tvLastName"
                 android:layout_centerHorizontal="true" />
 
@@ -93,17 +92,17 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/dialog_register_user_tvEmail"
                 android:id="@+id/tvPassword"
-                android:layout_below="@+id/editText2"
-                android:layout_alignLeft="@+id/editText2"
-                android:layout_alignStart="@+id/editText2" />
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/etLastName"
+                android:layout_alignLeft="@+id/etLastName"
+                android:layout_alignStart="@+id/etLastName" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:ems="10"
-                android:id="@+id/editText3"
-                android:layout_marginRight="30dp"
+                android:id="@+id/etMail"
                 android:layout_below="@+id/tvPassword"
                 android:layout_alignLeft="@+id/tvPassword"
                 android:layout_alignStart="@+id/tvPassword" />
@@ -114,17 +113,17 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/dialog_register_user_tvTelephone"
                 android:id="@+id/tvTelephone"
-                android:layout_below="@+id/editText3"
-                android:layout_alignLeft="@+id/editText3"
-                android:layout_alignStart="@+id/editText3" />
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/etMail"
+                android:layout_alignLeft="@+id/etMail"
+                android:layout_alignStart="@+id/etMail" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:id="@+id/editText4"
-                android:layout_marginRight="30dp"
+                android:id="@+id/etTelf"
                 android:layout_below="@+id/tvTelephone"
                 android:layout_alignLeft="@+id/tvTelephone"
                 android:layout_alignStart="@+id/tvTelephone" />
@@ -135,17 +134,17 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/dialog_register_user_tvAddress"
                 android:id="@+id/tvAddress"
-                android:layout_below="@+id/editText4"
-                android:layout_alignLeft="@+id/editText4"
-                android:layout_alignStart="@+id/editText4" />
+                android:layout_below="@+id/etTelf"
+                android:layout_marginTop="5dp"
+                android:layout_alignLeft="@+id/etTelf"
+                android:layout_alignStart="@+id/etTelf" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPostalAddress"
                 android:ems="10"
-                android:id="@+id/editText5"
-                android:layout_marginRight="30dp"
+                android:id="@+id/etAddress"
                 android:layout_below="@+id/tvAddress"
                 android:layout_alignLeft="@+id/tvAddress"
                 android:layout_alignStart="@+id/tvAddress" />
@@ -156,18 +155,18 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/dialog_register_user_tvPassword"
                 android:id="@+id/tvPass"
-                android:layout_below="@+id/editText5"
-                android:layout_alignLeft="@+id/editText5"
-                android:layout_alignStart="@+id/editText5" />
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/etAddress"
+                android:layout_alignLeft="@+id/etAddress"
+                android:layout_alignStart="@+id/etAddress" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText6"
+                android:id="@+id/etPassword"
                 android:layout_below="@+id/tvPass"
-                android:layout_marginRight="30dp"
                 android:layout_alignLeft="@+id/tvPass"
                 android:layout_alignStart="@+id/tvPass" />
 
@@ -177,21 +176,63 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/dialog_register_user_tvRepeatPassword"
                 android:id="@+id/tvRepeatPass"
-                android:layout_below="@+id/editText6"
-                android:layout_alignLeft="@+id/editText6"
-                android:layout_alignStart="@+id/editText6" />
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/etPassword"
+                android:layout_alignLeft="@+id/etPassword"
+                android:layout_alignStart="@+id/etPassword" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText7"
+                android:id="@+id/etRepeatPassword"
                 android:layout_below="@+id/tvRepeatPass"
-                android:layout_marginRight="30dp"
                 android:layout_alignLeft="@+id/tvRepeatPass"
                 android:layout_alignStart="@+id/tvRepeatPass"
                 android:layout_weight="1" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:background="@color/DarkGrey"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:divider="@drawable/vertical_divider"
+                android:dividerPadding="12dip"
+                android:layout_below="@+id/etRepeatPassword"
+                android:showDividers="middle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    style="@style/Buttons_dialog"
+                    android:layout_weight="1.5"
+                    android:text="@string/dialog_register_user_btnDialogCancel"
+                    android:id="@+id/btnDialogCancel" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    style="@style/Buttons_dialog"
+                    android:layout_weight="1.5"
+                    android:text="@string/dialog_register_user_btnDialogok"
+                    android:id="@+id/btnDialogok" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/dialog_register_user_tvTittleDialog"
+                android:id="@+id/textView2"
+                android:layout_marginTop="14dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
         </RelativeLayout>
     </ScrollView>
 

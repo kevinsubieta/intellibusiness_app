@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="DarkGrey">#808080</color>
     <color name="Silver">#C0C0C0</color>
+    <color name="colorBlack">#111</color>
+
+    <color name="white">#FFFAF0</color>
+    <color name="DeepSkyBlue">#00BFFF</color>
 </resources>

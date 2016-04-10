@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="100dp"
         android:layout_marginTop="100dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center">
 
         <EditText
             android:layout_width="match_parent"
@@ -36,11 +36,11 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="@string/activity_login_btnSignUp"
             android:id="@+id/la_btnSignUp"
             android:layout_marginTop="32dp"
-
+            style="@style/Buttons_dialog"
             android:onClick="clcBtnSignUp"
             android:layout_below="@+id/la_etPassUser"
             android:layout_centerHorizontal="true" />
@@ -51,8 +51,9 @@
             android:text="@string/activity_login_tvCreateAccount"
             android:id="@+id/la_tvCreateAccount"
             android:onClick="clcCreateNewAccount"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/la_btnSignUp"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp" />
     </RelativeLayout>
 </LinearLayout>

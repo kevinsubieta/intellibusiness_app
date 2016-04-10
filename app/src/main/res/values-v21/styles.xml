@@ -4,7 +4,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/DeepSkyBlue</item>
     </style>
 
     <style name="Theme_Dialog_Translucent" parent="android:Theme.DeviceDefault.Dialog">
@@ -13,6 +13,13 @@
 
     <style name="Theme_Dialog_loading" parent="@android:style/Theme.Material.Dialog.Alert">
         <item name="android:textColorPrimary">#000000</item>
+    </style>
+
+    <style name="Buttons_dialog">
+        <item name="android:background">@drawable/btn_efect_dialogs</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_big</item>
     </style>
 
 </resources>

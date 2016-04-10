@@ -25,5 +25,8 @@
     <string name="dialog_register_user_tvAddress">Dirección</string>
     <string name="dialog_register_user_tvPassword">Password</string>
     <string name="dialog_register_user_tvRepeatPassword">Repetir password</string>
+    <string name="dialog_register_user_btnDialogCancel">Cancel</string>
+    <string name="dialog_register_user_btnDialogok">Register</string>
+    <string name="dialog_register_user_tvTittleDialog">Register a new user</string>
 
 </resources>
