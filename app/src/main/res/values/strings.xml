@@ -29,4 +29,7 @@
     <string name="dialog_register_user_btnDialogok">Register</string>
     <string name="dialog_register_user_tvTittleDialog">Register a new user</string>
 
+    <string name="view_item_product_tvNameProduct">Product name</string>
+    <string name="view_item_product_tvPriceProduct">0.00$</string>
+
 </resources>

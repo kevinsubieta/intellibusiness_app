@@ -23,7 +23,6 @@
     </style>
 
     <style name="TextViews_dialog">
-
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">15dp</item>
     </style>
