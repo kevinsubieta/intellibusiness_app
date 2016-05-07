@@ -1,12 +1,23 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/ColorFacebookPalette</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:actionBarStyle">@style/AppActionBarTheme</item>
+        <item name="actionBarStyle">@style/AppActionBarTheme</item>
     </style>
+
+    <!-- Action Bar Theme -->
+    <style name="AppActionBarTheme" parent="@style/Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="background">@color/blue_main</item>
+        <item name="android:actionOverflowButtonStyle">@color/blue_accent</item>
+        <item name="colorPrimary">@color/blue_main</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColorHint">@color/colorBlack</item>
+    </style>
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

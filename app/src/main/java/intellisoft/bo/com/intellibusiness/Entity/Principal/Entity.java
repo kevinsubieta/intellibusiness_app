@@ -1,11 +1,9 @@
-package intellisoft.bo.com.intellibusiness.Entity.Principal;
-
-import android.util.Log;
+package intellisoft.bo.com.intellibusiness.entity.Principal;
 
 import java.io.Serializable;
 
-import intellisoft.bo.com.intellibusiness.Entity.anotation.Ignore;
-import intellisoft.bo.com.intellibusiness.Entity.anotation.Key;
+import intellisoft.bo.com.intellibusiness.entity.anotation.Ignore;
+import intellisoft.bo.com.intellibusiness.entity.anotation.Key;
 
 @SuppressWarnings("serial")
 public class Entity implements Serializable, Cloneable {

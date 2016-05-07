@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">IntelliBusiness</string>
 
+    <string name="senderID">608195282407</string>
+    <string name="serverAPIKey">AIzaSyD6FNPDmgIcHDAAW42NfnUP2pOM7S0yiyU</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

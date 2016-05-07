@@ -1,4 +1,4 @@
-package intellisoft.bo.com.intellibusiness.Entity.Principal;
+package intellisoft.bo.com.intellibusiness.entity.Principal;
 
 public enum Action {
 	None, Insert, Update, Delete;

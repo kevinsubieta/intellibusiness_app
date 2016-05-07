@@ -1,4 +1,4 @@
-package intellisoft.bo.com.intellibusiness.Entity.anotation;
+package intellisoft.bo.com.intellibusiness.entity.anotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

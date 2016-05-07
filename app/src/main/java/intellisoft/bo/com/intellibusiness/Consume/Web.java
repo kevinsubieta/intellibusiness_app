@@ -1,4 +1,4 @@
-package intellisoft.bo.com.intellibusiness.Consume;
+package intellisoft.bo.com.intellibusiness.consume;
 
 import android.content.Context;
 import android.net.Uri;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import intellisoft.bo.com.intellibusiness.Entity.Principal.Entity;
+import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
 import intellisoft.bo.com.intellibusiness.utils.Functions;
 
 

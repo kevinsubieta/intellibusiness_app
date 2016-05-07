@@ -1,4 +1,4 @@
-package intellisoft.bo.com.intellibusiness.Consume;
+package intellisoft.bo.com.intellibusiness.consume;
 
 import java.io.Serializable;
 
