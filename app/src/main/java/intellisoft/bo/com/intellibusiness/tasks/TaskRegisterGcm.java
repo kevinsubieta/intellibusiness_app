@@ -49,7 +49,7 @@ public class TaskRegisterGcm extends AsyncTask<String, Void, String> {
 			gcm = GoogleCloudMessaging.getInstance(activity);
 			String gcmRegID = gcm.register(activity.getResources().getString(R.string.senderID));
 			//if (gcmRegID != null && !gcmRegID.isEmpty()) {
-				Log.i(TAG, "Device registered, registration GCM ID = " + gcmRegID);
+				Log.d(TAG, "Device registered, registration GCM ID = " + gcmRegID);
 			//	prefs.setRegistration_GCM_Id(activity, gcmRegID);
 			//	client = updateRegistrationGCMID(client, gcmRegID);
 			} catch (IOException e) {
@@ -88,7 +88,7 @@ public class TaskRegisterGcm extends AsyncTask<String, Void, String> {
 			for (Signature signature : info.signatures) {
 				MessageDigest md = MessageDigest.getInstance("SHA");
 				md.update(signature.toByteArray());
-				Log.e("CHECKIN", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+				Log.e(TAG, Base64.encodeToString(md.digest(), Base64.DEFAULT));
 				System.out.println(Base64.encodeToString(md.digest(), Base64.DEFAULT));
 				String s = Base64.encodeToString(md.digest(), Base64.DEFAULT);
 				s = "";

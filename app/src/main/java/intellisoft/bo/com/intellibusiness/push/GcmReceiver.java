@@ -15,5 +15,6 @@ public class GcmReceiver extends com.google.android.gms.gcm.GcmReceiver {
                 RegistrationIntentService.class.getName());
         startWakefulService(context, (intent.setComponent(comp)));
         setResultCode(Activity.RESULT_OK);
+
     }
 }
