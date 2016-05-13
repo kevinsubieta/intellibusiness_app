@@ -20,20 +20,13 @@
             android:id="@+id/swipe_container"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent">
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/listView"
-                android:layout_gravity="center_horizontal" />
 
-            <GridView
+            <HeaderGridView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/gridView" />
+                android:id="@+id/hgvNews" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
-
-
 
     </LinearLayout>
 </RelativeLayout>
