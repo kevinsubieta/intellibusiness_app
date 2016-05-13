@@ -30,7 +30,6 @@ import android.widget.WrapperListAdapter;
 import java.util.ArrayList;
 /**
  * A {@link GridView} that supports adding header rows in a
- * very similar way to
  * See {@link HeaderGridView#addHeaderView(View, Object, boolean)}
  */
 public class HeaderGridView extends GridView {
