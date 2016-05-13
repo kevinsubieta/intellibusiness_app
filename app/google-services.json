@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "608195282407",
+    "project_id": "intellibusiness-7f27b"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608195282407:android:ae6229316df9747e",
+        "android_client_info": {
+          "package_name": "intellisoft.bo.com.intellibusiness"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjZ5KXX6xOjIWWMAQPf8YlEv16uzDFKZk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
