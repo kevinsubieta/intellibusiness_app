@@ -1,10 +1,13 @@
 package intellisoft.bo.com.intellibusiness.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,20 +18,42 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 import intellisoft.bo.com.intellibusiness.R;
+import intellisoft.bo.com.intellibusiness.components.adapters.NewersAdapter;
+import intellisoft.bo.com.intellibusiness.components.gridviews.HeaderGridView;
+import intellisoft.bo.com.intellibusiness.entity.inventario.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadNews;
+import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadNews;
 import intellisoft.bo.com.intellibusiness.tasks.TaskRegisterGcm;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnCompleteDownloadNews {
+
+    private intellisoft.bo.com.intellibusiness.components.gridviews.HeaderGridView gridViewNews;
+    private List<ProductoEmpresa> lstProductoEmpresas;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        initComponents();
         new TaskRegisterGcm(MainActivity.this).execute();
+        new TaskDownloadNews(MainActivity.this,this,swipeRefreshLayout).execute();
+
+
+    }
+
+    private void initComponents(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container_main);
+        refreshSwipe();
+        setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        this.gridViewNews = (HeaderGridView) findViewById(R.id.hgvNews);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,6 +71,17 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    private void refreshSwipe() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+                new TaskDownloadNews(MainActivity.this,MainActivity.this,swipeRefreshLayout).execute();
+            }
+        });
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -75,10 +111,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_settings:
+                return true;
+            case R.id.action_openCart:
+                finish();
+                startActivity(new Intent(MainActivity.this,ShopCartActivity.class));
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -104,5 +144,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onCorrectDownload(List<ProductoEmpresa> lstProductoEmpresas) {
+        this.lstProductoEmpresas = lstProductoEmpresas;
+        this.gridViewNews.setAdapter(new NewersAdapter(MainActivity.this,lstProductoEmpresas));
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onErrorDownload() {
+        this.lstProductoEmpresas = null;
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

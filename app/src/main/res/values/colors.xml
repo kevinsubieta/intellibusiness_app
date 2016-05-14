@@ -13,4 +13,5 @@
     <color name="ColorPurple">#800080</color>
     <item name="blue_main" type="color">#2196F3</item>
     <item name="blue_accent" type="color">#0CBABA</item>
+    <item name="dodgerBlue" type="color">#1E90FF</item>
 </resources>

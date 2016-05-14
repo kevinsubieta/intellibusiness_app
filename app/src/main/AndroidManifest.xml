@@ -44,6 +44,18 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
+        <activity
+        android:name=".ui.ShopCartActivity"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".ui.ProductActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
