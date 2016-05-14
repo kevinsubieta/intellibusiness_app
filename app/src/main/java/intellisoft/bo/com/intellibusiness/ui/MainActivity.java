@@ -57,8 +57,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this, InboxActivity.class));
             }
         });
 
@@ -115,7 +114,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_settings:
                 return true;
             case R.id.action_openCart:
-                finish();
                 startActivity(new Intent(MainActivity.this,ShopCartActivity.class));
                 break;
         }
@@ -150,7 +148,6 @@ public class MainActivity extends AppCompatActivity
     public void onCorrectDownload(List<ProductoEmpresa> lstProductoEmpresas) {
         this.lstProductoEmpresas = lstProductoEmpresas;
         this.gridViewNews.setAdapter(new NewersAdapter(MainActivity.this,lstProductoEmpresas));
-        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

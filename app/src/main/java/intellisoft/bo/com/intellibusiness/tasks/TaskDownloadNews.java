@@ -57,8 +57,9 @@ public class TaskDownloadNews extends AsyncTask<Void, Void,List<ProductoEmpresa>
     protected void onPostExecute(List<ProductoEmpresa> productoEmpresas) {
         if(productoEmpresas!=null){
             onCompleteDownloadNews.onCorrectDownload(productoEmpresas);
-            return;
+        } else {
+            onCompleteDownloadNews.onErrorDownload();
         }
-        onCompleteDownloadNews.onErrorDownload();
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

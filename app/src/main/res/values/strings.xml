@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">IntelliBusiness</string>
+    <string name="activity_shopcart_name">Carrito</string>
 
     <string name="senderID">608195282407</string>
     <string name="serverAPIKey">AIzaSyD6FNPDmgIcHDAAW42NfnUP2pOM7S0yiyU</string>
