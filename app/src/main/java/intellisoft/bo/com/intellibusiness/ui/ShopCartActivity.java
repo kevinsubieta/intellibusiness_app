@@ -44,7 +44,6 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
     }
 
     private void initComponents() {
-        //   getActionBar().setTitle(getResources().getString(R.string.activity_shopcart_name));
         this.lvShoppingCart = (ListView) findViewById(R.id.lvShoppingCart);
         this.swipe_container_shopcart = (SwipeRefreshLayout) findViewById(R.id.swipe_container_shopcart);
         this.lvShoppingCart = (ListView) findViewById(R.id.lvShoppingCart);

@@ -6,6 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:background="@drawable/border_image"
         android:layout_gravity="center_horizontal">
 
         <ImageView
@@ -14,6 +15,7 @@
             android:layout_margin="10dp"
             android:id="@+id/ivImageOffer"
             android:src="@drawable/ic_collections_black_48dp"
+            android:background="@drawable/border_image"
             android:layout_centerHorizontal="true" />
 
         <TextView

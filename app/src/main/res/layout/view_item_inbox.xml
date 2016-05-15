@@ -5,14 +5,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:background="@drawable/border_image"
+        android:layout_height="70dp">
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/ivImageNotif"
             android:layout_marginLeft="10dp"
-            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_image"
+            android:padding="1dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -22,6 +25,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
             android:id="@+id/tvTittleNotif"
+            android:layout_marginLeft="10dp"
             android:layout_alignTop="@+id/ivImageNotif"
             android:layout_toRightOf="@+id/ivImageNotif"
             android:layout_toEndOf="@+id/ivImageNotif" />
@@ -32,6 +36,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
             android:id="@+id/tvDateNotif"
+            android:layout_marginLeft="10dp"
             android:layout_below="@+id/tvTittleNotif"
             android:layout_toRightOf="@+id/ivImageNotif"
             android:layout_toEndOf="@+id/ivImageNotif" />
