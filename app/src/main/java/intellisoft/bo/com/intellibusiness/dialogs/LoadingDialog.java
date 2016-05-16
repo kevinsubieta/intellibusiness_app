@@ -18,7 +18,7 @@ public class LoadingDialog extends ProgressDialog {
 
 
     public LoadingDialog(Context context) {
-        super(context);
+        super(context,R.style.Theme_Dialog_loading);
     }
 
     public LoadingDialog(Context context,TaskLoginUser taskLoginUser, int themeResId) {

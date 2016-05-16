@@ -17,16 +17,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.androidquery.AQuery;
 
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.components.adapters.NewersAdapter;
 import intellisoft.bo.com.intellibusiness.components.gridviews.HeaderGridView;
+import intellisoft.bo.com.intellibusiness.entity.administrativo.Usuario;
 import intellisoft.bo.com.intellibusiness.entity.inventario.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadNews;
 import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadNews;
 import intellisoft.bo.com.intellibusiness.tasks.TaskRegisterGcm;
+import intellisoft.bo.com.intellibusiness.utils.PreferencesManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnCompleteDownloadNews {
@@ -35,6 +41,8 @@ public class MainActivity extends AppCompatActivity
     private List<ProductoEmpresa> lstProductoEmpresas;
     private SwipeRefreshLayout swipeRefreshLayout;
     private String TAG = "MainActivity";
+    private PreferencesManager preferencesManager;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +77,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        preferencesManager = new PreferencesManager(MainActivity.this);
+        usuario = preferencesManager.getUsuario();
+        if(usuario!= null){
+            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tvNavUserName)).setText(usuario.getLoggin());
+            ((TextView)navigationView.getHeaderView(0).findViewById(R.id.tvNavEmail)).setText(usuario.getEmail());
+            new AQuery(MainActivity.this).id((ImageView)navigationView.getHeaderView(0).
+                    findViewById(R.id.ivNavUserPicture)).image(R.drawable.ic_account_circle);
+        }
+
     }
 
     private void refreshSwipe() {
@@ -95,7 +113,8 @@ public class MainActivity extends AppCompatActivity
                     .setNegativeButton(android.R.string.cancel, null)//sin listener
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {//un listener que al pulsar, cierre la aplicacion
                         public void onClick(DialogInterface dialog, int which) {
-                           finish();
+                            Log.d(TAG, getResources().getString(R.string.splash_activity_msjcancel));
+                            android.os.Process.killProcess(android.os.Process.myPid());
                         }
                     }).show();
         }

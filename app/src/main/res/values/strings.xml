@@ -15,7 +15,8 @@
     <string name="activity_login_etUserName">Nombre de usuario</string>
     <string name="activity_login_btnSignUp">Login</string>
     <string name="activity_login_tvCreateAccount">Crear nueva cuenta</string>
-    <string name="dialog_loading_tvLoading">Processing data...</string>
+    <string name="dialog_loading_tvLoading">Procesando datos...</string>
+    <string name="dialog_loading_msjRegister">Registrando usuarios, por favor espere...</string>
 
     <string name="login_activity_msjLogOk">Logeado correctamente</string>
     <string name="login_activity_msjLogNO">Usuario o contraseña equivocado</string>
@@ -23,6 +24,7 @@
 
     <string name="dialog_register_user_tvUserName">Nombre de usuario</string>
     <string name="dialog_register_user_tvName">Nombres</string>
+    <string name="dialog_register_user_tvCI">CI</string>
     <string name="dialog_register_user_tvLastName">Apellidos</string>
     <string name="dialog_register_user_tvEmail">Email</string>
     <string name="dialog_register_user_tvTelephone">Teléfono</string>
@@ -30,8 +32,10 @@
     <string name="dialog_register_user_tvPassword">Password</string>
     <string name="dialog_register_user_tvRepeatPassword">Repetir password</string>
     <string name="dialog_register_user_btnDialogCancel">Cancel</string>
-    <string name="dialog_register_user_btnDialogok">Register</string>
-    <string name="dialog_register_user_tvTittleDialog">Register a new user</string>
+    <string name="dialog_register_user_btnDialogok">Registrar</string>
+    <string name="dialog_register_user_tvTittleDialog">Register un nuevo usuario</string>
+    <string name="dialog_register_user_msjError">Error al registrar usuario</string>
+    <string name="dialog_register_user_msjIncorrect">Revise los campos de registro</string>
 
     <string name="view_item_product_tvNameProduct">Product name</string>
     <string name="view_item_product_tvPriceProduct">0.00$</string>

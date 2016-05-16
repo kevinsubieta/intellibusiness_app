@@ -5,17 +5,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="130dp"
         android:background="@drawable/border_image"
-        android:layout_height="60dp">
+        android:layout_gravity="center_horizontal">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/ivImageNotif"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/ivProduct"
             android:background="@drawable/border_image"
-            android:padding="1dp"
+            android:src="@drawable/ic_collections_black_48dp"
+            android:layout_marginLeft="8dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -23,25 +24,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/tvTittleNotif"
-            android:textSize="18dp"
+            android:text="@string/view_item_product_tvNameProduct"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_alignTop="@+id/ivImageNotif"
-            android:layout_toRightOf="@+id/ivImageNotif"
-            android:layout_toEndOf="@+id/ivImageNotif" />
+            android:id="@+id/tvNameProduct"
+            android:layout_alignTop="@+id/ivProduct"
+            android:layout_toRightOf="@+id/ivProduct"
+            android:layout_toEndOf="@+id/ivProduct" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/tvDateNotif"
-            android:textSize="14dp"
             android:layout_marginLeft="10dp"
-            android:layout_below="@+id/tvTittleNotif"
-            android:layout_toRightOf="@+id/ivImageNotif"
-            android:layout_toEndOf="@+id/ivImageNotif" />
+            android:layout_marginTop="10dp"
+            android:text="@string/view_item_product_tvPriceProduct"
+            android:id="@+id/tvPriceProduct"
+            android:layout_below="@+id/tvNameProduct"
+            android:layout_toRightOf="@+id/ivProduct"
+            android:layout_toEndOf="@+id/ivProduct" />
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -49,6 +51,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:layout_marginRight="10dp"
+            android:textSize="20dp"
             android:id="@+id/cbDelete"
             android:checked="false"
             android:visibility="gone"

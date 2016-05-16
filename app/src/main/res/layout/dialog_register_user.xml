@@ -39,10 +39,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text=""
                 android:ems="10"
                 android:id="@+id/etUserName"
-                android:layout_below="@+id/tvUserName" />
+                android:layout_below="@+id/tvUserName"
+                android:text="Kevin Subieta" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,20 +52,20 @@
                 android:text="@string/dialog_register_user_tvName"
                 android:id="@+id/tvName"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/etUserName"
-                android:layout_alignLeft="@+id/etUserName"
-                android:layout_alignStart="@+id/etUserName" />
+                android:layout_below="@+id/etCI"
+                android:layout_alignLeft="@+id/etCI"
+                android:layout_alignStart="@+id/etCI" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text=""
                 android:ems="10"
                 android:id="@+id/etName"
                 android:layout_below="@+id/tvName"
                 android:layout_alignLeft="@+id/tvName"
-                android:layout_alignStart="@+id/tvName" />
+                android:layout_alignStart="@+id/tvName"
+                android:text="Kevin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,11 +83,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:text=""
                 android:ems="10"
                 android:id="@+id/etLastName"
                 android:layout_below="@+id/tvLastName"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:text="Subieta Burgos" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,7 +109,8 @@
                 android:id="@+id/etMail"
                 android:layout_below="@+id/tvPassword"
                 android:layout_alignLeft="@+id/tvPassword"
-                android:layout_alignStart="@+id/tvPassword" />
+                android:layout_alignStart="@+id/tvPassword"
+                android:text="kevinsubieta@gmail.com" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -131,7 +132,8 @@
                 android:id="@+id/etTelf"
                 android:layout_below="@+id/tvTelephone"
                 android:layout_alignLeft="@+id/tvTelephone"
-                android:layout_alignStart="@+id/tvTelephone" />
+                android:layout_alignStart="@+id/tvTelephone"
+                android:text="75627761" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -153,7 +155,8 @@
                 android:id="@+id/etAddress"
                 android:layout_below="@+id/tvAddress"
                 android:layout_alignLeft="@+id/tvAddress"
-                android:layout_alignStart="@+id/tvAddress" />
+                android:layout_alignStart="@+id/tvAddress"
+                android:text="Guayacan # 2025" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -175,7 +178,8 @@
                 android:id="@+id/etPassword"
                 android:layout_below="@+id/tvPass"
                 android:layout_alignLeft="@+id/tvPass"
-                android:layout_alignStart="@+id/tvPass" />
+                android:layout_alignStart="@+id/tvPass"
+                android:text="123" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -198,7 +202,8 @@
                 android:layout_below="@+id/tvRepeatPass"
                 android:layout_alignLeft="@+id/tvRepeatPass"
                 android:layout_alignStart="@+id/tvRepeatPass"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:text="123" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -240,6 +245,28 @@
                 android:layout_marginTop="14dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
+
+            <TextView
+                style="@style/TextViews_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/dialog_register_user_tvCI"
+                android:id="@+id/tvCI"
+                android:layout_below="@+id/etUserName"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/etCI"
+                android:layout_below="@+id/tvCI"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="9827308" />
 
         </RelativeLayout>
     </ScrollView>

@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.List;
@@ -24,12 +27,17 @@ import intellisoft.bo.com.intellibusiness.utils.AppStatics;
  */
 public class InboxActivity extends AppCompatActivity implements OnCompleteDownloadNotif{
     private ListView lvInbox;
+    private InboxAdapter inboxAdapter;
     private SwipeRefreshLayout swipe_container_inbox;
     private List<Notifications> lstNotifications;
+    public static boolean checkDelete;
+    private MenuItem ibActionDeleted;
+    private Menu menuItems;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkDelete = false;
         setContentView(R.layout.activity_inbox);
         initComponents();
         new TaskDownloadNotif(InboxActivity.this,InboxActivity.this,swipe_container_inbox).execute();
@@ -61,12 +69,23 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_inbox, menu);
+        this.menuItems = menu;
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
                 finish();
                 break;
             case R.id.action_delete_sweep:
+                checkDelete = !checkDelete;
+                ibActionDeleted = menuItems.findItem(R.id.action_delete_item);
+                ibActionDeleted.setVisible(checkDelete ? true : false);
+                inboxAdapter.notifyDataSetChanged();
                 break;
             case R.id.action_delete_item:
                 break;
@@ -78,7 +97,8 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
     @Override
     public void onCorrectDownload(List<Notifications> lstNotifications) {
         this.lstNotifications = lstNotifications;
-        this.lvInbox.setAdapter(new InboxAdapter(InboxActivity.this,lstNotifications));
+        inboxAdapter = new InboxAdapter(InboxActivity.this,lstNotifications);
+        this.lvInbox.setAdapter(inboxAdapter);
     }
 
     @Override

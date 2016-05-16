@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Adapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -34,9 +35,15 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
     private List<ShoppingCart> lstShoppingCarts;
     private ListView lvShoppingCart;
 
+    private Menu menuShopCart;
+    private MenuItem ibActionDeleted;
+    private ShoppingCartAdapter shopCartAdapter;
+    public static boolean checkDelete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        checkDelete = false;
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_shoppingcart);
         initComponents();
@@ -78,6 +85,7 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_shopcart, menu);
+        menuShopCart = menu;
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -88,6 +96,10 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
                 finish();
                 break;
             case R.id.action_delete_sweep:
+                checkDelete = !checkDelete;
+                ibActionDeleted = menuShopCart.findItem(R.id.action_delete_item);
+                ibActionDeleted.setVisible(checkDelete ? true : false);
+                shopCartAdapter.notifyDataSetChanged();
                 break;
             case R.id.action_delete_item:
                 break;
@@ -99,7 +111,8 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
     @Override
     public void onCorrectDownload(List<ShoppingCart> lstShoppingCarts) {
         this.lstShoppingCarts = lstShoppingCarts;
-        this.lvShoppingCart.setAdapter(new ShoppingCartAdapter(ShopCartActivity.this,lstShoppingCarts));
+        this.shopCartAdapter = new ShoppingCartAdapter(ShopCartActivity.this,lstShoppingCarts);
+        this.lvShoppingCart.setAdapter(shopCartAdapter);
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.app.Notifications;
+import intellisoft.bo.com.intellibusiness.ui.InboxActivity;
 
 /**
  * Created by Subieta on 14/05/2016.
@@ -52,6 +54,7 @@ public class InboxAdapter extends BaseAdapter {
         viewHolder.ivImageNotif = (ImageView) convertView.findViewById(R.id.ivImageNotif);
         viewHolder.tvTittleNotif = (TextView) convertView.findViewById(R.id.tvTittleNotif);
         viewHolder.tvDateNotif = (TextView) convertView.findViewById(R.id.tvDateNotif);
+        viewHolder.cbDelete = (CheckBox) convertView.findViewById(R.id.cbDelete);
 
         if(lstNotifications.get(position).getImagen()!= null){
             aQuery.id(viewHolder.ivImageNotif).image(lstNotifications.get(position).getImagen());
@@ -62,6 +65,7 @@ public class InboxAdapter extends BaseAdapter {
             viewHolder.tvTittleNotif.setText(lstNotifications.get(position).getTitulo());
             viewHolder.tvDateNotif.setText(lstNotifications.get(position).getFecha());
         }
+        viewHolder.cbDelete.setVisibility(InboxActivity.checkDelete ? View.VISIBLE : View.GONE);
         return convertView;
     }
 
@@ -70,5 +74,6 @@ public class InboxAdapter extends BaseAdapter {
         ImageView ivImageNotif;
         TextView tvTittleNotif;
         TextView tvDateNotif;
+        CheckBox cbDelete;
     }
 }
