@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        HeaderGridView headerGridView = (HeaderGridView) findViewById(R.id.hgvNews);
+
         preferencesManager = new PreferencesManager(MainActivity.this);
         usuario = preferencesManager.getUsuario();
         if(usuario!= null){
@@ -88,6 +90,8 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
+
 
     private void refreshSwipe() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

@@ -48,5 +48,16 @@
     <string name="main_drawer_Category">Categorias</string>
     <string name="main_drawer_Enterprise">Empresas</string>
 
+    <string name="activity_detail_product_tvProductTittle">Este es un nombre de producto, que debe ser muy largo y por lo menos soportar este texto</string>
+    <string name="activity_detail_product_tvProductPrice">2000.00 BS</string>
+    <string name="activity_detail_product_tvOffer"> Oferta:</string>
+    <string name="activity_detail_product_btnBuy"> ¡Cómpralo ya! </string>
+    <string name="activity_detail_product_btnAddCart"> Añadir al carrito </string>
+    <string name="activity_detail_product_tvInfoProduct"> Información de este producto: </string>
+    <string name="activity_detail_product_tvState"> Estado: </string>
+    <string name="activity_detail_product_tvQuantity"> Cantidad: </string>
+    <string name="activity_detail_product_tvCategory"> Categoría: </string>
+    <string name="activity_detail_product_tvCorp"> Información del vendedor: </string>
+
 
 </resources>

@@ -1,6 +1,7 @@
 package intellisoft.bo.com.intellibusiness.components.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.inventario.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.ui.DetailProductActivity;
 
 /**
  * Created by kevin on 13/05/2016.
@@ -58,6 +60,13 @@ public class NewersAdapter extends BaseAdapter {
         viewHolder.tvDescriptionOffer.setText(lstProductoEmpresas.get(position).getNombre());
         viewHolder.tvPriceNewer.setText(Double.toString(lstProductoEmpresas.get(position).getPrecio()));
 
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, DetailProductActivity.class));
+            }
+        });
         return convertView;
     }
 

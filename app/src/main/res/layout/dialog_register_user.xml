@@ -214,8 +214,8 @@
                 android:layout_marginBottom="10dp"
                 android:divider="@drawable/vertical_divider"
                 android:dividerPadding="12dip"
-                android:layout_below="@+id/etRepeatPassword"
                 android:showDividers="middle"
+                android:layout_below="@+id/etRepeatPassword"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true">
 
