@@ -51,7 +51,7 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setTitle("Hola");
+            getSupportActionBar().setTitle(getResources().getString(R.string.activity_inbox_tittle));
             final Drawable upArrow = getResources().getDrawable(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
             upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
             getSupportActionBar().setHomeAsUpIndicator(upArrow);

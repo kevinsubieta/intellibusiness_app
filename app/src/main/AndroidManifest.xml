@@ -45,27 +45,31 @@
         </activity>
 
         <activity
-        android:name=".ui.ShopCartActivity"
-        android:label="@string/app_name"
-        android:screenOrientation="portrait">
+            android:name=".ui.ShopCartActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppActionBarTheme">
         </activity>
 
         <activity
             android:name=".ui.ProductActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppActionBarTheme">
         </activity>
 
         <activity
             android:name=".ui.InboxActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppActionBarTheme">
         </activity>
 
         <activity
             android:name=".ui.DetailProductActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppActionBarTheme">
         </activity>
 
         <receiver
