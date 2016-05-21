@@ -1,6 +1,4 @@
-package intellisoft.bo.com.intellibusiness.entity.marketing;
-
-import java.util.List;
+package intellisoft.bo.com.intellibusiness.entity.mark;
 
 import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
 

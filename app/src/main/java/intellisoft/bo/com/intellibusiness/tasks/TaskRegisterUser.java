@@ -3,16 +3,16 @@ package intellisoft.bo.com.intellibusiness.tasks;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ProgressBar;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
 
 import intellisoft.bo.com.intellibusiness.R;
+import intellisoft.bo.com.intellibusiness.consume.Services;
 import intellisoft.bo.com.intellibusiness.dialogs.LoadingDialog;
-import intellisoft.bo.com.intellibusiness.entity.administrativo.Cliente;
-import intellisoft.bo.com.intellibusiness.entity.administrativo.Usuario;
+import intellisoft.bo.com.intellibusiness.entity.adm.Cliente;
+import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteRegister;
 import intellisoft.bo.com.intellibusiness.utils.PreferencesManager;
 
@@ -45,17 +45,17 @@ public class TaskRegisterUser extends AsyncTask<Void,Void,Boolean>{
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
-            GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
-            String gcmRegID = gcm.register(context.getResources().getString(R.string.senderID));
-            Log.d(TAG, "Device registered, registration GCM ID = " + gcmRegID);
-            usuario.setCliente(new Cliente(gcmRegID));
-            preferencesManager.setUsuario(usuario);
-            //Registramos con  el servicio por un post.
-            return true;
-        } catch (IOException e) {
+            usuario.setCliente(new Cliente("0"));
+            Services services = new Services(context);
+            if(services.registry(usuario) != null){
+                preferencesManager.setUsuario(usuario);
+                return true;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+        return false;
     }
 
     @Override

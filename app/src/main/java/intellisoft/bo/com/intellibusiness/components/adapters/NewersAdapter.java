@@ -11,12 +11,10 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
-import intellisoft.bo.com.intellibusiness.entity.inventario.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.ui.DetailProductActivity;
 
 /**

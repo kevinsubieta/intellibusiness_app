@@ -1,10 +1,7 @@
-package intellisoft.bo.com.intellibusiness.entity.administrativo;
+package intellisoft.bo.com.intellibusiness.entity.adm;
 
 import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
 
-/**
- * Created by Subieta on 15/05/2016.
- */
 public class Cliente extends Entity {
     String gcm;
 

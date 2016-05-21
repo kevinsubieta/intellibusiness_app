@@ -1,4 +1,4 @@
-package intellisoft.bo.com.intellibusiness.entity.inventario;
+package intellisoft.bo.com.intellibusiness.entity.inv;
 
 import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
 

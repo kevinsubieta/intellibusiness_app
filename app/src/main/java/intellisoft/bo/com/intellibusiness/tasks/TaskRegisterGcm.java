@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.security.MessageDigest;
 
 import intellisoft.bo.com.intellibusiness.R;
+import intellisoft.bo.com.intellibusiness.consume.Services;
+import intellisoft.bo.com.intellibusiness.entity.adm.Cliente;
+import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 import intellisoft.bo.com.intellibusiness.utils.AppStatics;
 import intellisoft.bo.com.intellibusiness.utils.PreferencesManager;
 
@@ -43,44 +46,25 @@ public class TaskRegisterGcm extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected String doInBackground(String... arg0) {
-	//	Client client = prefs.getClient();
+		Usuario usuario = prefs.getUsuario();
 		try {
-		//	String gcmRegID = prefs.getRegistration_GCM_Id();
 			gcm = GoogleCloudMessaging.getInstance(activity);
 			String gcmRegID = gcm.register(activity.getResources().getString(R.string.senderID));
-			//if (gcmRegID != null && !gcmRegID.isEmpty()) {
+			if (gcmRegID != null && !gcmRegID.isEmpty()) {
+				usuario.setCliente(new Cliente(gcmRegID));
+				Services services =  new Services(activity);
+				services.registry(usuario);
 				Log.d(TAG, "Device registered, registration GCM ID = " + gcmRegID);
-			//	prefs.setRegistration_GCM_Id(activity, gcmRegID);
-			//	client = updateRegistrationGCMID(client, gcmRegID);
-			} catch (IOException e) {
+				return null;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		else {
-//				Log.i(App.TAG, "Empty Registration GCM ID");
-//				client = null;
-//				}
-			catch (Exception e1) {
-			e1.printStackTrace();
-		}
-//		else {
-//				if (!client.getApn_gcm().equals(gcmRegID)) {
-//					client = updateRegistrationGCMID(client, gcmRegID);
-//				}
-//			}
-//		} catch (Exception e) {
-//			Log.e(App.TAG, "Ocurrio un error en el registro de GCM. : " + e.getMessage());
-//			e.printStackTrace();
-//		}
-	//	Log.i(TAG,client != null? "Registro GCM correcto.":"Registro GCM incorrecto.");
-
 		return null;
 	}
 
-//	private Client updateRegistrationGCMID(Client client, String gcmId) throws Exception {
-//		Services services = new Services(activity);
-//		client.setApn_gcm(gcmId);
-//		return services.registry(client);
-//	}
 
 	private void getHashKey() {
 		try {

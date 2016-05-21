@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.content.IntentCompat;
 
-import intellisoft.bo.com.intellibusiness.entity.administrativo.Usuario;
 import intellisoft.bo.com.intellibusiness.ui.LoginActivity;
 import intellisoft.bo.com.intellibusiness.ui.MainActivity;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteSplash;
-import intellisoft.bo.com.intellibusiness.utils.AppStatics;
 import intellisoft.bo.com.intellibusiness.utils.PreferencesManager;
 
 /**

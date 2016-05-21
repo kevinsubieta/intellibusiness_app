@@ -8,14 +8,11 @@ import android.support.v4.content.IntentCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import intellisoft.bo.com.intellibusiness.R;
-import intellisoft.bo.com.intellibusiness.entity.administrativo.Cliente;
-import intellisoft.bo.com.intellibusiness.entity.administrativo.Usuario;
+import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteRegister;
 import intellisoft.bo.com.intellibusiness.tasks.TaskRegisterUser;
 import intellisoft.bo.com.intellibusiness.ui.MainActivity;
@@ -81,13 +78,14 @@ public class RegisterDialog extends Dialog implements OnCompleteRegister {
                 && validateText(etAddress) && verifyPasswords(etPassword,etRepeatPassword)){
 
             Usuario usuario = new Usuario(etUserName.getText().toString(),
-                                            Integer.parseInt(etCI.getText().toString()),
-                                            etName.getText().toString(),
-                                            etLastName.getText().toString(),
-                                            etMail.getText().toString(),
-                                            etTelf.getText().toString(),
-                                            etAddress.getText().toString(),
-                                            etPassword.getText().toString(), false);
+                                        etPassword.getText().toString(),
+                                        Integer.parseInt(etCI.getText().toString()),
+                                        etName.getText().toString(),
+                                        etLastName.getText().toString(),
+                                        etMail.getText().toString(),
+                                        etTelf.getText().toString(),
+                                        etAddress.getText().toString(),
+                                        null);
 
             new TaskRegisterUser (context,this,usuario).execute();
         } else {

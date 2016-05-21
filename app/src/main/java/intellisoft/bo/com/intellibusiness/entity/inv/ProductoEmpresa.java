@@ -1,9 +1,9 @@
-package intellisoft.bo.com.intellibusiness.entity.inventario;
+package intellisoft.bo.com.intellibusiness.entity.inv;
 
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
-import intellisoft.bo.com.intellibusiness.entity.marketing.ProductoDescuento;
+import intellisoft.bo.com.intellibusiness.entity.mark.ProductoDescuento;
 
 /**
  * Created by Subieta on 13/05/2016.

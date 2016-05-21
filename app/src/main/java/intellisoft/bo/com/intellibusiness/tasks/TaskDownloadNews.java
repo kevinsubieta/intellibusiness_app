@@ -7,10 +7,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import intellisoft.bo.com.intellibusiness.entity.inventario.ImagenProducto;
-import intellisoft.bo.com.intellibusiness.entity.inventario.ProductoEmpresa;
-import intellisoft.bo.com.intellibusiness.entity.marketing.Descuento;
-import intellisoft.bo.com.intellibusiness.entity.marketing.ProductoDescuento;
+import intellisoft.bo.com.intellibusiness.entity.inv.ImagenProducto;
+import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.entity.mark.Descuento;
+import intellisoft.bo.com.intellibusiness.entity.mark.ProductoDescuento;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadNews;
 
 /**

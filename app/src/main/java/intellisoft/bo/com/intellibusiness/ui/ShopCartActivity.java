@@ -1,19 +1,13 @@
 package intellisoft.bo.com.intellibusiness.ui;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
-import android.widget.Adapter;
 import android.widget.ListView;
 
 import java.util.List;
@@ -21,10 +15,8 @@ import java.util.List;
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.components.adapters.ShoppingCartAdapter;
 import intellisoft.bo.com.intellibusiness.entity.app.ShoppingCart;
-import intellisoft.bo.com.intellibusiness.entity.inventario.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadCart;
 import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadCart;
-import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadNews;
 
 /**
  * Created by Subieta on 13/05/2016.

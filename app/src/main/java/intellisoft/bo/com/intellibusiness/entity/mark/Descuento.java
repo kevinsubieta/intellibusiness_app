@@ -1,4 +1,4 @@
-package intellisoft.bo.com.intellibusiness.entity.marketing;
+package intellisoft.bo.com.intellibusiness.entity.mark;
 
 import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
 

@@ -41,7 +41,7 @@ public class SplashActivity extends AwesomeSplash implements OnCompleteSplash{
 
         //Customize Logo
         configSplash.setLogoSplash(R.mipmap.ic_launcher); //or any other drawable
-        configSplash.setAnimLogoSplashDuration(2000); //int ms
+        configSplash.setAnimLogoSplashDuration(1000); //int ms
         configSplash.setAnimLogoSplashTechnique(Techniques.Bounce); //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 
 
@@ -49,10 +49,10 @@ public class SplashActivity extends AwesomeSplash implements OnCompleteSplash{
 
         configSplash.setOriginalHeight(400); //in relation to your svg (path) resource
         configSplash.setOriginalWidth(400); //in relation to your svg (path) resource
-        configSplash.setAnimPathStrokeDrawingDuration(3000);
+        configSplash.setAnimPathStrokeDrawingDuration(2500);
         configSplash.setPathSplashStrokeSize(3); //I advise value be <5
         configSplash.setPathSplashStrokeColor(R.color.colorBlack); //any color you want form colors.xml
-        configSplash.setAnimPathFillingDuration(3000);
+        configSplash.setAnimPathFillingDuration(2500);
         configSplash.setPathSplashFillColor(R.color.colorBlack); //path object filling color
 
 

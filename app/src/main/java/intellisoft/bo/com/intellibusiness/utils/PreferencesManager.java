@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import intellisoft.bo.com.intellibusiness.entity.administrativo.Usuario;
+import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 
 /**
  * Created by Subieta on 29/03/2016.

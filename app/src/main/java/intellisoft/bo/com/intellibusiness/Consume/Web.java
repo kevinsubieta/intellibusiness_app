@@ -36,7 +36,7 @@ public abstract class Web {
 	private final String TAG = "ServiceConsume";
 	private boolean hasConnection = false;
 	private Context context;
-	public static String WEB_SERVER = "http://checkin.dualbiz.net:8080/CheckInWS/Services";
+	public static String WEB_SERVER = "http://192.168.0.107:8080/IntelliBusinessWebS/Services";
 	private static String APP_USER = "";
 	private static String APP_PASSWORD = "";
 	private static final Integer TIMEOUT_CONNECTION = 30;

@@ -1,4 +1,4 @@
-package intellisoft.bo.com.intellibusiness.entity.administrativo;
+package intellisoft.bo.com.intellibusiness.entity.adm;
 
 import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
 
@@ -7,43 +7,25 @@ import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
  */
 public class Usuario extends Entity {
     private String loggin;
+    private String pass;
     private int ci;
     private String nombres;
     private String apellidos;
     private String email;
     private String telefono;
     private String direccion;
-    private String password;
-    private Boolean baja;
     private Cliente cliente;
 
-    public Usuario() {
-    }
-
-    public Usuario(String loggin, int ci, String nombres, String apellidos, String email,
-                   String telefono, String direccion, String password, Boolean baja) {
+    public Usuario(String loggin, String pass, int ci, String nombres, String apellidos, String email,
+                   String telefono, String direccion, Cliente cliente) {
         this.loggin = loggin;
+        this.pass = pass;
         this.ci = ci;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.email = email;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.password = password;
-        this.baja = baja;
-    }
-
-    public Usuario(String loggin, int ci, String nombres, String apellidos, String email,
-                   String telefono, String direccion, String password, Boolean baja, Cliente cliente) {
-        this.loggin = loggin;
-        this.ci = ci;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.email = email;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.password = password;
-        this.baja = baja;
         this.cliente = cliente;
     }
 
@@ -53,6 +35,14 @@ public class Usuario extends Entity {
 
     public void setLoggin(String loggin) {
         this.loggin = loggin;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public int getCi() {
@@ -101,22 +91,6 @@ public class Usuario extends Entity {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getBaja() {
-        return baja;
-    }
-
-    public void setBaja(Boolean baja) {
-        this.baja = baja;
     }
 
     public Cliente getCliente() {
