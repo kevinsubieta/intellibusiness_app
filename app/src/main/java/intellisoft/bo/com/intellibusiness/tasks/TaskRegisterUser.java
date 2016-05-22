@@ -45,17 +45,22 @@ public class TaskRegisterUser extends AsyncTask<Void,Void,Boolean>{
     @Override
     protected Boolean doInBackground(Void... params) {
         try {
-            usuario.setCliente(new Cliente("0"));
+            Cliente cliente = new Cliente("0");
+            usuario.setCliente(cliente);
             Services services = new Services(context);
-            if(services.registry(usuario) != null){
+            long id= services.registryUser(usuario).getId();
+            if(id != -1){
+                cliente.setId(id);
+                this.usuario.setId(id);
+                this.usuario.setCliente(cliente);
                 preferencesManager.setUsuario(usuario);
                 return true;
             }
+            return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-        return false;
     }
 
     @Override

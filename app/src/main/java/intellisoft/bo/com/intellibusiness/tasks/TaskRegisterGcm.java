@@ -26,7 +26,7 @@ import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 import intellisoft.bo.com.intellibusiness.utils.AppStatics;
 import intellisoft.bo.com.intellibusiness.utils.PreferencesManager;
 
-public class TaskRegisterGcm extends AsyncTask<String, Void, String> {
+public class TaskRegisterGcm extends AsyncTask<String, Void, Boolean> {
 
 	private GoogleCloudMessaging gcm;
 	private Activity activity;
@@ -45,24 +45,29 @@ public class TaskRegisterGcm extends AsyncTask<String, Void, String> {
 	}
 
 	@Override
-	protected String doInBackground(String... arg0) {
-		Usuario usuario = prefs.getUsuario();
+	protected Boolean doInBackground(String... arg0) {
+		Cliente cliente = prefs.getUsuario().getCliente();
 		try {
 			gcm = GoogleCloudMessaging.getInstance(activity);
 			String gcmRegID = gcm.register(activity.getResources().getString(R.string.senderID));
 			if (gcmRegID != null && !gcmRegID.isEmpty()) {
-				usuario.setCliente(new Cliente(gcmRegID));
-				Services services =  new Services(activity);
-				services.registry(usuario);
-				Log.d(TAG, "Device registered, registration GCM ID = " + gcmRegID);
-				return null;
+				if(cliente.getGcm() != gcmRegID){
+					cliente.setGcm(gcmRegID);
+					Services services =  new Services(activity);
+					Cliente notification = 	services.updateClient(cliente);
+					if(notification !=null){
+						Log.d(TAG, "Device registered, registration GCM ID = " + gcmRegID);
+						return true;
+					}
+				}
+				return false;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 
 

@@ -15,6 +15,7 @@
     <string name="activity_login_etUserName">Nombre de usuario</string>
     <string name="activity_login_btnSignUp">Login</string>
     <string name="activity_login_tvCreateAccount">Crear nueva cuenta</string>
+    <string name="activity_login_msjError">Datos incorrectos</string>
 
     <string name="dialog_loading_tvLoading">Procesando datos...</string>
     <string name="dialog_loading_msjRegister">Registrando usuarios, por favor espere...</string>
@@ -47,6 +48,7 @@
     <string name="main_drawer_Tittle">Mi catálogo</string>
     <string name="main_drawer_Category">Categorias</string>
     <string name="main_drawer_Enterprise">Empresas</string>
+    <string name="main_drawer_logout">Cerrar sesion</string>
 
 
     <string name="activity_detail_product_tvProductTittle">Este es un nombre de producto, que debe ser muy largo y por lo menos soportar este texto</string>

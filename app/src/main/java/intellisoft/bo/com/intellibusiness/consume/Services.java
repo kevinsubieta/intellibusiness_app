@@ -24,13 +24,35 @@ public class Services extends Web {
         builder = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
     }
 
-    public Usuario registry(Usuario obj) throws Exception {
+    public Usuario registryUser(Usuario obj) throws Exception {
         String metodo = "/Adm/Cliente/guardar";
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put("user", new Gson().toJson(obj));
         try {
-            return getByPost(metodo, Usuario.class, params);
+            return  getByPost(metodo,Usuario.class,params);
         } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Cliente updateClient(Cliente obj) throws Exception {
+        String metodo = "/Adm/Cliente/update";
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("cliente", new Gson().toJson(obj));
+        try {
+            return  getByPost(metodo,Cliente.class,params);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+
+    public Usuario validateClients(String userName, String password) {
+        String metodo = "/Adm/Cliente/Validate/" + userName + "/" + password;
+        try{
+            return get(metodo,Usuario.class);
+        }catch(Exception e){
+            e.printStackTrace();
             return null;
         }
     }
