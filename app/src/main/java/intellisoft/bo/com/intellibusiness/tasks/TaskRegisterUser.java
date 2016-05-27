@@ -48,7 +48,7 @@ public class TaskRegisterUser extends AsyncTask<Void,Void,Boolean>{
             Cliente cliente = new Cliente("0");
             usuario.setCliente(cliente);
             Services services = new Services(context);
-            long id= services.registryUser(usuario).getId();
+            int id= services.registryUser(usuario).getId();
             if(id != -1){
                 cliente.setId(id);
                 this.usuario.setId(id);

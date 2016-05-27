@@ -7,16 +7,21 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import intellisoft.bo.com.intellibusiness.consume.Services;
 import intellisoft.bo.com.intellibusiness.entity.app.Notifications;
+import intellisoft.bo.com.intellibusiness.entity.mark.Inbox;
+import intellisoft.bo.com.intellibusiness.entity.mark.Notificacion;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadNotif;
+import intellisoft.bo.com.intellibusiness.utils.PreferencesManager;
 
 /**
  * Created by Subieta on 15/05/2016.
  */
-public class TaskDownloadNotif extends AsyncTask<Void,Void,List<Notifications>> {
+public class TaskDownloadNotif extends AsyncTask<Void,Void,List<Inbox>> {
     private Context context;
     private OnCompleteDownloadNotif onCompleteDownloadNotif;
     private SwipeRefreshLayout swipeRefreshLayout;
+
 
     public TaskDownloadNotif(Context context, OnCompleteDownloadNotif onCompleteDownloadNotif,
                              SwipeRefreshLayout swipeRefreshLayout) {
@@ -32,22 +37,23 @@ public class TaskDownloadNotif extends AsyncTask<Void,Void,List<Notifications>> 
     }
 
     @Override
-    protected List<Notifications> doInBackground(Void... params) {
-        List<Notifications> lstNotifications = new ArrayList<>();
-
-        lstNotifications.add(new Notifications("Notificación 1","16/05/2016","http://www.formagazin.hu/wp-content/themes/corporatebusiness/images/customers/14.png"));
-        lstNotifications.add(new Notifications("Notificación 2","16/05/2016"));
-        lstNotifications.add(new Notifications("Notificación 2","16/05/2016","http://www.formagazin.hu/wp-content/themes/corporatebusiness/images/customers/14.png"));
-
-        return lstNotifications;
+    protected List<Inbox> doInBackground(Void... params) {
+        List<Inbox> lstInbox = new ArrayList<>();
+        PreferencesManager preferencesManager = new PreferencesManager(context);
+        Services services = new Services(context);
+        if(preferencesManager !=null){
+            lstInbox = services.getInbox(preferencesManager.getUsuario().getId());
+            return lstInbox;
+        }
+        return null;
     }
 
     @Override
-    protected void onPostExecute(List<Notifications> lstNotifications) {
+    protected void onPostExecute(List<Inbox> lstNotifications) {
         if(lstNotifications!=null){
             onCompleteDownloadNotif.onCorrectDownload(lstNotifications);
         }else {
-            onCompleteDownloadNotif.onErrorDownload();
+            onCompleteDownloadNotif.onErrorDownload(1);
         }
         swipeRefreshLayout.setRefreshing(false);
         super.onPostExecute(lstNotifications);

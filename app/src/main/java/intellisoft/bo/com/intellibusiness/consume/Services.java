@@ -4,11 +4,16 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.entity.adm.Cliente;
 import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
+import intellisoft.bo.com.intellibusiness.entity.mark.Inbox;
+import intellisoft.bo.com.intellibusiness.entity.mark.Notificacion;
 
 /**
  * Created by kevin on 21/05/2016.
@@ -56,5 +61,28 @@ public class Services extends Web {
             return null;
         }
     }
+
+    public List<Inbox> getInbox(int id) {
+        String metodo = "/Adm/Cliente/Notifications/" + id;
+        try{
+            return getList(metodo,new TypeToken<ArrayList<Inbox>>(){}.getType());
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Inbox> deleteNotification(List<Inbox> lstInbox){
+        String metodo = "/Adm/Cliente/DeleteNotifications";
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("lstInbox",new Gson().toJson(lstInbox));
+        try{
+           return getListByPost(metodo,params,new TypeToken<ArrayList<Inbox>>(){}.getType());
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+
 
 }

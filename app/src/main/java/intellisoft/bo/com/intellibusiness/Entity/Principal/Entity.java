@@ -9,16 +9,16 @@ import intellisoft.bo.com.intellibusiness.entity.anotation.Key;
 public class Entity implements Serializable, Cloneable {
 
 	@Key
-	protected Long id;
+	protected int id;
 
 	@Ignore
 	private Action action = Action.None;
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

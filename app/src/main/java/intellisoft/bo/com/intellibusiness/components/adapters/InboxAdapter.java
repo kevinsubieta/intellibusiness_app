@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,8 @@ import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.app.Notifications;
+import intellisoft.bo.com.intellibusiness.entity.mark.Inbox;
+import intellisoft.bo.com.intellibusiness.entity.mark.Notificacion;
 import intellisoft.bo.com.intellibusiness.ui.InboxActivity;
 
 /**
@@ -23,23 +26,23 @@ import intellisoft.bo.com.intellibusiness.ui.InboxActivity;
  */
 public class InboxAdapter extends BaseAdapter {
     Context context;
-    List<Notifications> lstNotifications;
+    List<Inbox> lstInbox;
     AQuery aQuery;
 
-    public InboxAdapter(Context context, List<Notifications> lstNotifications) {
+    public InboxAdapter(Context context, List<Inbox> lstInbox) {
         this.context = context;
-        this.lstNotifications = lstNotifications;
+        this.lstInbox = lstInbox;
         this.aQuery = new AQuery(context);
     }
 
     @Override
     public int getCount() {
-        return lstNotifications.size();
+        return lstInbox.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return lstNotifications.get(position);
+        return lstInbox.get(position);
     }
 
     @Override
@@ -48,7 +51,7 @@ public class InboxAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         HeaderGridViewHolder viewHolder = new HeaderGridViewHolder();
         convertView = LayoutInflater.from(context).inflate(R.layout.view_item_inbox,null,true);
         viewHolder.ivImageNotif = (ImageView) convertView.findViewById(R.id.ivImageNotif);
@@ -56,16 +59,31 @@ public class InboxAdapter extends BaseAdapter {
         viewHolder.tvDateNotif = (TextView) convertView.findViewById(R.id.tvDateNotif);
         viewHolder.cbDelete = (CheckBox) convertView.findViewById(R.id.cbDelete);
 
-        if(lstNotifications.get(position).getImagen()!= null){
-            aQuery.id(viewHolder.ivImageNotif).image(lstNotifications.get(position).getImagen());
-            viewHolder.tvTittleNotif.setText(lstNotifications.get(position).getTitulo());
-            viewHolder.tvDateNotif.setText(lstNotifications.get(position).getFecha());
+        if(lstInbox.get(position).getNotification().getImagen()!= null){
+            aQuery.id(viewHolder.ivImageNotif).image(lstInbox.get(position).getNotification().getImagen());
+            viewHolder.tvTittleNotif.setText(lstInbox.get(position).getNotification().getTexto());
+         //   viewHolder.tvDateNotif.setText(lstNotifications.get(position).getFecha());
         } else {
             aQuery.id(viewHolder.ivImageNotif).image(R.drawable.ic_notific_text);
-            viewHolder.tvTittleNotif.setText(lstNotifications.get(position).getTitulo());
-            viewHolder.tvDateNotif.setText(lstNotifications.get(position).getFecha());
+            viewHolder.tvTittleNotif.setText(lstInbox.get(position).getNotification().getImagen());
+         //   viewHolder.tvDateNotif.setText(lstNotifications.get(position).getFecha());
         }
         viewHolder.cbDelete.setVisibility(InboxActivity.checkDelete ? View.VISIBLE : View.GONE);
+
+        viewHolder.cbDelete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(InboxActivity.checkDelete){
+                    if(isChecked){
+                        InboxActivity.lstInboxForDelete.add(lstInbox.get(position));
+                    } else {
+                        InboxActivity.lstInboxForDelete.remove(lstInbox.get(position));
+                    }
+                }
+
+            }
+        });
+
         return convertView;
     }
 

@@ -8,14 +8,21 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.components.adapters.InboxAdapter;
 import intellisoft.bo.com.intellibusiness.entity.app.Notifications;
+import intellisoft.bo.com.intellibusiness.entity.mark.Inbox;
+import intellisoft.bo.com.intellibusiness.entity.mark.Notificacion;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadNotif;
+import intellisoft.bo.com.intellibusiness.tasks.TaskDeleteNotif;
 import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadCart;
 import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadNotif;
 import intellisoft.bo.com.intellibusiness.utils.AppStatics;
@@ -27,10 +34,12 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
     private ListView lvInbox;
     private InboxAdapter inboxAdapter;
     private SwipeRefreshLayout swipe_container_inbox;
-    private List<Notifications> lstNotifications;
+    private List<Inbox> lstInbox;
+    public static List<Inbox> lstInboxForDelete = new ArrayList<>();
     public static boolean checkDelete;
     private MenuItem ibActionDeleted;
     private Menu menuItems;
+    private CheckBox cbItems;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +53,9 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
     private void initComponents(){
         this.lvInbox = (ListView) findViewById(R.id.lvInbox);
         this.swipe_container_inbox = (SwipeRefreshLayout) findViewById(R.id.swipe_container_inbox);
+        this.cbItems = (CheckBox) findViewById(R.id.cbDelete);
         refreshSwipe();
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,6 +77,13 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
         });
     }
 
+    public void onClicItemCheckBox(View view){
+        if(cbItems.isChecked()){
+
+
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_inbox, menu);
@@ -80,27 +98,59 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
                 finish();
                 break;
             case R.id.action_delete_sweep:
-                checkDelete = !checkDelete;
-                ibActionDeleted = menuItems.findItem(R.id.action_delete_item);
-                ibActionDeleted.setVisible(checkDelete ? true : false);
-                inboxAdapter.notifyDataSetChanged();
+                changeActionBar();
                 break;
             case R.id.action_delete_item:
+                if(!lstInboxForDelete.isEmpty()){
+                    new TaskDeleteNotif(InboxActivity.this,this).execute();
+                }
+
                 break;
 
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void changeActionBar(){
+        checkDelete = !checkDelete;
+        ibActionDeleted = menuItems.findItem(R.id.action_delete_item);
+        ibActionDeleted.setVisible(checkDelete ? true : false);
+        inboxAdapter.notifyDataSetChanged();
+    }
+
     @Override
-    public void onCorrectDownload(List<Notifications> lstNotifications) {
-        this.lstNotifications = lstNotifications;
-        inboxAdapter = new InboxAdapter(InboxActivity.this,lstNotifications);
+    public void onCorrectDownload(List<Inbox> lstNotifications) {
+        this.lstInbox = lstNotifications;
+        inboxAdapter = new InboxAdapter(InboxActivity.this,lstInbox);
         this.lvInbox.setAdapter(inboxAdapter);
     }
 
     @Override
-    public void onErrorDownload() {
+    public void onErrorDownload(int type) {
+        switch (type){
+        case 1:
 
+        break;
+            case 2:
+
+                break;
+        }
+    }
+
+    @Override
+    public void onCorrectDelete(List<Inbox> lstDeletedInbox) {
+        ArrayList<Inbox> lstAux = new ArrayList<>(lstInbox);
+        for(Inbox inbox : lstInbox){
+            for(Inbox inbox1 : lstDeletedInbox){
+                if(inbox.getIdc() == inbox1.getIdc() && inbox.getIdn()==inbox1.getIdn()){
+                    lstAux.remove(inbox);
+                }
+            }
+        }
+        lstInbox = lstAux;
+        changeActionBar();
+        inboxAdapter = new InboxAdapter(InboxActivity.this,lstInbox);
+        this.lvInbox.setAdapter(inboxAdapter);
+        lstInboxForDelete.clear();
     }
 }
