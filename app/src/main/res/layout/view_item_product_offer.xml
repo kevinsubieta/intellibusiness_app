@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="2dp"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -12,7 +13,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/ivImageOffer"
             android:src="@drawable/ic_collections_black_48dp"
             android:background="@drawable/border_image"
@@ -24,15 +27,19 @@
             style="@style/TextViews_productTittle"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:layout_marginRight="50dp"
             android:id="@+id/tvDescriptionOffer"
+            android:textStyle="bold"
+            android:maxLength="20"
+            android:textSize="20dp"
             android:layout_below="@+id/ivImageOffer"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignLeft="@+id/ivImageOffer"
+            android:layout_alignStart="@+id/ivImageOffer" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/TextViewPriceStyle"
+            android:textSize="16dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/view_item_product_tvPriceProduct_offer"
             android:id="@+id/tvPriceNewer"

@@ -47,6 +47,8 @@
     <string name="main_drawer_Product">Productos</string>
     <string name="main_drawer_Tittle">Mi catálogo</string>
     <string name="main_drawer_Category">Categorias</string>
+    <string name="main_drawer_info">Acerca de...</string>
+    <string name="main_drawer_config">Configuracion</string>
     <string name="main_drawer_Enterprise">Empresas</string>
     <string name="main_drawer_logout">Cerrar sesion</string>
 

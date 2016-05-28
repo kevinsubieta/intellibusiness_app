@@ -7,13 +7,17 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import intellisoft.bo.com.intellibusiness.consume.Services;
+import intellisoft.bo.com.intellibusiness.entity.adm.Cliente;
 import intellisoft.bo.com.intellibusiness.entity.app.ShoppingCart;
+import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadCart;
+import intellisoft.bo.com.intellibusiness.utils.PreferencesManager;
 
 /**
  * Created by Subieta on 14/05/2016.
  */
-public class TaskDownloadCart extends AsyncTask<Void,Void,List<ShoppingCart>> {
+public class TaskDownloadCart extends AsyncTask<Void,Void,List<ProductoEmpresa>> {
     private Context context;
     private OnCompleteDownloadCart onCompleteDownloadCart;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -32,20 +36,22 @@ public class TaskDownloadCart extends AsyncTask<Void,Void,List<ShoppingCart>> {
     }
 
     @Override
-    protected List<ShoppingCart> doInBackground(Void... params) {
-        List<ShoppingCart> lstShoppingCarts = new ArrayList<>();
-        lstShoppingCarts.add(new ShoppingCart("http://www.golfideal.com/images/carrito-popup.png","carrito1",1.11));
-        lstShoppingCarts.add(new ShoppingCart("http://www.golfideal.com/images/carrito-popup.png","carrito2",2.11));
-        lstShoppingCarts.add(new ShoppingCart("http://www.golfideal.com/images/carrito-popup.png","carrito3",3.11));
-        return lstShoppingCarts;
+    protected List<ProductoEmpresa> doInBackground(Void... params) {
+        Services services = new Services(context);
+        PreferencesManager preferencesManager = new PreferencesManager(context);
+        List<ProductoEmpresa> lstProductoEmpresas = null;
+        if(preferencesManager != null){
+          lstProductoEmpresas = services.getShopCart(preferencesManager.getUsuario().getId());
+        }
+        return lstProductoEmpresas!=null ? lstProductoEmpresas : null;
     }
 
     @Override
-    protected void onPostExecute(List<ShoppingCart> lstShoppingCarts) {
+    protected void onPostExecute(List<ProductoEmpresa> lstShoppingCarts) {
         if(lstShoppingCarts!=null){
             onCompleteDownloadCart.onCorrectDownload(lstShoppingCarts);
         } else {
-            onCompleteDownloadCart.onErrorDownload();
+            onCompleteDownloadCart.onErrorDownload(1);
         }
         swipeRefreshLayout.setRefreshing(false);
     }

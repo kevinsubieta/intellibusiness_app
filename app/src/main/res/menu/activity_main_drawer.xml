@@ -13,11 +13,11 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="@string/main_drawer_info" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="@string/main_drawer_config" />
     </group>
 
     <item android:title="@string/main_drawer_Tittle">
@@ -28,7 +28,7 @@
                 android:title="@string/main_drawer_Category" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_menu_share"
                 android:title="@string/main_drawer_Enterprise" />
             <item
                 android:id="@+id/nav_logout"

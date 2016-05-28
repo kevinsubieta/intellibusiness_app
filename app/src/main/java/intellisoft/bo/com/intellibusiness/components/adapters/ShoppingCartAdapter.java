@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,8 @@ import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.app.ShoppingCart;
+import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.entity.ven.CarritoProducto;
 import intellisoft.bo.com.intellibusiness.ui.ShopCartActivity;
 
 /**
@@ -22,10 +25,10 @@ import intellisoft.bo.com.intellibusiness.ui.ShopCartActivity;
  */
 public class ShoppingCartAdapter extends BaseAdapter {
     Context context;
-    List<ShoppingCart> lstShoppingCarts;
+    List<CarritoProducto> lstShoppingCarts;
     AQuery aQuery;
 
-    public ShoppingCartAdapter(Context context, List<ShoppingCart> lstShoppingCarts) {
+    public ShoppingCartAdapter(Context context, List<CarritoProducto> lstShoppingCarts) {
         this.context = context;
         this.lstShoppingCarts = lstShoppingCarts;
         this.aQuery = new AQuery(context);
@@ -47,7 +50,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(context).inflate(R.layout.view_item_shopcart,null,true);
         ListViewHolder holder = new ListViewHolder();
         holder.ivProduct = (ImageView) convertView.findViewById(R.id.ivProduct);
@@ -55,10 +58,23 @@ public class ShoppingCartAdapter extends BaseAdapter {
         holder.tvPriceProduct = (TextView) convertView.findViewById(R.id.tvPriceProduct);
         holder.cbDelete = (CheckBox) convertView.findViewById(R.id.cbDelete);
 
-        aQuery.id(holder.ivProduct).image(lstShoppingCarts.get(position).getImage());
-        holder.tvNameProduct.setText(lstShoppingCarts.get(position).getNombre());
-        holder.tvPriceProduct.setText(Double.toString(lstShoppingCarts.get(position).getPrecio()) + " $u$");
+       // aQuery.id(holder.ivProduct).image(lstShoppingCarts.get(position).); Imagen principal prod
+        holder.tvNameProduct.setText(lstShoppingCarts.get(position).getProductoEmpresa().getNombre());
+        holder.tvPriceProduct.setText(Double.toString(lstShoppingCarts.get(position).getProductoEmpresa().getPrecio()) + " $u$");
         holder.cbDelete.setVisibility(ShopCartActivity.checkDelete ? View.VISIBLE : View.GONE);
+
+        holder.cbDelete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(ShopCartActivity.checkDelete){
+                    if(isChecked){
+                        ShopCartActivity.lstShopForDelete.add(lstShoppingCarts.get(position));
+                    } else {
+                        ShopCartActivity.lstShopForDelete.add(lstShoppingCarts.get(position));
+                    }
+                }
+            }
+        });
         return convertView;
     }
 

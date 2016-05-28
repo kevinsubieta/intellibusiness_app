@@ -12,6 +12,7 @@ import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.entity.adm.Cliente;
 import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
+import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.entity.mark.Inbox;
 import intellisoft.bo.com.intellibusiness.entity.mark.Notificacion;
 
@@ -78,6 +79,27 @@ public class Services extends Web {
         params.put("lstInbox",new Gson().toJson(lstInbox));
         try{
            return getListByPost(metodo,params,new TypeToken<ArrayList<Inbox>>(){}.getType());
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public List<ProductoEmpresa> getShopCart(int id) {
+        String metodo = "/Adm/Cliente/ShopCart/" + id;
+        try{
+            return getList(metodo,new TypeToken<ArrayList<ProductoEmpresa>>(){}.getType());
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<ProductoEmpresa> deleteShopCart(List<ProductoEmpresa> lstShopCart){
+        String metodo = "/Adm/Cliente/DeleteShopCart";
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("lstShop",new Gson().toJson(lstShopCart));
+        try{
+            return getListByPost(metodo,params,new TypeToken<ArrayList<ProductoEmpresa>>(){}.getType());
         }catch (Exception e){
             return null;
         }

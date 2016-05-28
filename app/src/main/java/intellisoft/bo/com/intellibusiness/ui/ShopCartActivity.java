@@ -10,12 +10,16 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.components.adapters.ShoppingCartAdapter;
 import intellisoft.bo.com.intellibusiness.entity.app.ShoppingCart;
+import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.entity.ven.CarritoProducto;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadCart;
+import intellisoft.bo.com.intellibusiness.tasks.TaskDeleteCart;
 import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadCart;
 
 /**
@@ -24,7 +28,8 @@ import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadCart;
 public class ShopCartActivity extends AppCompatActivity implements OnCompleteDownloadCart {
 
     private SwipeRefreshLayout swipe_container_shopcart;
-    private List<ShoppingCart> lstShoppingCarts;
+    private List<CarritoProducto> lstShoppingCarts;
+    public static List<CarritoProducto> lstShopForDelete = new ArrayList<>();
     private ListView lvShoppingCart;
 
     private Menu menuShopCart;
@@ -74,6 +79,13 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
         });
     }
 
+    private void changeActionBar(){
+        checkDelete = !checkDelete;
+        ibActionDeleted = menuShopCart.findItem(R.id.action_delete_item);
+        ibActionDeleted.setVisible(checkDelete ? true : false);
+        shopCartAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_shopcart, menu);
@@ -88,12 +100,12 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
                 finish();
                 break;
             case R.id.action_delete_sweep:
-                checkDelete = !checkDelete;
-                ibActionDeleted = menuShopCart.findItem(R.id.action_delete_item);
-                ibActionDeleted.setVisible(checkDelete ? true : false);
-                shopCartAdapter.notifyDataSetChanged();
+                changeActionBar();
                 break;
             case R.id.action_delete_item:
+                if(!lstShopForDelete.isEmpty()){
+                    new TaskDeleteCart(ShopCartActivity.this,this);
+                }
                 break;
 
         }
@@ -101,14 +113,39 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
     }
 
     @Override
-    public void onCorrectDownload(List<ShoppingCart> lstShoppingCarts) {
+    public void onCorrectDownload(List<CarritoProducto> lstShoppingCarts) {
         this.lstShoppingCarts = lstShoppingCarts;
         this.shopCartAdapter = new ShoppingCartAdapter(ShopCartActivity.this,lstShoppingCarts);
         this.lvShoppingCart.setAdapter(shopCartAdapter);
     }
 
     @Override
-    public void onErrorDownload() {
+    public void onCorrectDeleted(List<CarritoProducto> lstShoppingDel) {
+        ArrayList<CarritoProducto> lstAux = new ArrayList<>(lstShoppingCarts);
+        for(CarritoProducto cart : lstShoppingCarts){
+            for(CarritoProducto cart1 : lstShoppingDel){
+                if(cart.getIdc()==cart1.getIdc() && cart.getIdp()==cart1.getIdp()){
+                    lstAux.remove(cart);
+                }
+            }
+        }
+        lstShoppingCarts = lstAux;
+        changeActionBar();
+        shopCartAdapter = new ShoppingCartAdapter(ShopCartActivity.this,lstShoppingCarts);
+        this.lvShoppingCart.setAdapter(shopCartAdapter);
+        lstShoppingCarts.clear();
 
+    }
+
+    @Override
+    public void onErrorDownload(int type) {
+        switch (type){
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+        }
     }
 }
