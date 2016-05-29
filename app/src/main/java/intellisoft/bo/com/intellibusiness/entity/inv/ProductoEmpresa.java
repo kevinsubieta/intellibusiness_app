@@ -1,5 +1,6 @@
 package intellisoft.bo.com.intellibusiness.entity.inv;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
@@ -10,23 +11,26 @@ import intellisoft.bo.com.intellibusiness.entity.mark.ProductoDescuento;
  */
 public class ProductoEmpresa extends Entity {
 
-    String producto;
-    String empresa;
-    String nombre;
-    int cantidad;
-    double precio;
-    int estado;
-    String detalle;
-    List<ProductoDescuento> lstProductoDescuentos;
-    List<ImagenProducto> lstImagenProducto;
+    private static final long serialVersionUID = 553370507762070250L;
 
+    private int producto;
+    private int empresa;
+    private String nombre;
+    private int cantidad;
+    private BigDecimal precio;
+    private int estado;
+    private String detalle;
+    private boolean oferta;
+    private List<ImagenProducto> lstImgProducto;
+    private List<ProductoDescuento> lstProductoDes;
+    private Producto insProducto;
 
     public ProductoEmpresa() {
     }
 
-    public ProductoEmpresa(String producto, String empresa, String nombre, int cantidad, double precio,
-                           int estado, String detalle,
-                           List<ProductoDescuento> lstProductoDescuentos, List<ImagenProducto> lstImagenProducto) {
+    public ProductoEmpresa(int producto, int empresa, String nombre, int cantidad, BigDecimal precio,
+                           int estado, String detalle, boolean oferta, List<ImagenProducto> lstImgProducto,
+                           List<ProductoDescuento> lstProductoDes, Producto insProducto) {
         this.producto = producto;
         this.empresa = empresa;
         this.nombre = nombre;
@@ -34,23 +38,25 @@ public class ProductoEmpresa extends Entity {
         this.precio = precio;
         this.estado = estado;
         this.detalle = detalle;
-        this.lstProductoDescuentos = lstProductoDescuentos;
-        this.lstImagenProducto = lstImagenProducto;
+        this.oferta = oferta;
+        this.lstImgProducto = lstImgProducto;
+        this.lstProductoDes = lstProductoDes;
+        this.insProducto = insProducto;
     }
 
-    public String getProducto() {
+    public int getProducto() {
         return producto;
     }
 
-    public void setProducto(String producto) {
+    public void setProducto(int producto) {
         this.producto = producto;
     }
 
-    public String getEmpresa() {
+    public int getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(String empresa) {
+    public void setEmpresa(int empresa) {
         this.empresa = empresa;
     }
 
@@ -70,11 +76,11 @@ public class ProductoEmpresa extends Entity {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
+    public BigDecimal getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 
@@ -94,19 +100,35 @@ public class ProductoEmpresa extends Entity {
         this.detalle = detalle;
     }
 
-    public List<ProductoDescuento> getLstProductoDescuentos() {
-        return lstProductoDescuentos;
+    public boolean isOferta() {
+        return oferta;
     }
 
-    public void setLstProductoDescuentos(List<ProductoDescuento> lstProductoDescuentos) {
-        this.lstProductoDescuentos = lstProductoDescuentos;
+    public void setOferta(boolean oferta) {
+        this.oferta = oferta;
     }
 
-    public List<ImagenProducto> getLstImagenProducto() {
-        return lstImagenProducto;
+    public List<ImagenProducto> getLstImgProducto() {
+        return lstImgProducto;
     }
 
-    public void setLstImagenProducto(List<ImagenProducto> lstImagenProducto) {
-        this.lstImagenProducto = lstImagenProducto;
+    public void setLstImgProducto(List<ImagenProducto> lstImgProducto) {
+        this.lstImgProducto = lstImgProducto;
+    }
+
+    public List<ProductoDescuento> getLstProductoDes() {
+        return lstProductoDes;
+    }
+
+    public void setLstProductoDes(List<ProductoDescuento> lstProductoDes) {
+        this.lstProductoDes = lstProductoDes;
+    }
+
+    public Producto getInsProducto() {
+        return insProducto;
+    }
+
+    public void setInsProducto(Producto insProducto) {
+        this.insProducto = insProducto;
     }
 }

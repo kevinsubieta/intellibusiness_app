@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -16,7 +18,11 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 
+import java.util.List;
+
 import intellisoft.bo.com.intellibusiness.R;
+import intellisoft.bo.com.intellibusiness.entity.inv.ImagenProducto;
+import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 
 /**
  * Created by Subieta on 16/05/2016.
@@ -26,40 +32,70 @@ public class DetailProductActivity extends AppCompatActivity implements
 
     private SliderLayout demoSliderProduct;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ProductoEmpresa productoEmpresa;
+    private TextView tvProductTittle;
+    private TextView tvProductPrice;
+    private ImageView ivCompanyDet;
+    private TextView tvCompanyDet;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_product);
-        demoSliderProduct = (SliderLayout) findViewById(R.id.sldImageProduct);
-
-        TextSliderView textSliderView = new TextSliderView(this);
-        textSliderView.description("Descripcion1")
-                        .image("http://klipd.com/screenshots/4a6741181059c3548e464f32a3adf67c-1.jpg")
-                        .setScaleType(BaseSliderView.ScaleType.Fit)
-                        .setOnSliderClickListener(this);
-        demoSliderProduct.addSlider(textSliderView);
-
-        TextSliderView textSliderView2 = new TextSliderView(this);
-        textSliderView2.description("Descripcion1")
-                .image("http://horrorsandscaryshits.blox.pl/resource/hostel4.jpg")
-                .setScaleType(BaseSliderView.ScaleType.Fit)
-                .setOnSliderClickListener(this);
-        demoSliderProduct.addSlider(textSliderView2);
-
-        demoSliderProduct.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
-        demoSliderProduct.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        demoSliderProduct.setCustomAnimation(new DescriptionAnimation());
-        demoSliderProduct.setDuration(4000);
-        demoSliderProduct.addOnPageChangeListener(this);
         initComponents();
+        initSlider();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }
 
+    private void initSlider(){
+        List<ImagenProducto> lstImagenes = productoEmpresa.getLstImgProducto();
+        if(lstImagenes.size()>0){
+            for(ImagenProducto imagenProducto : lstImagenes){
+                TextSliderView textSliderView = new TextSliderView(this);
+                textSliderView.description(productoEmpresa.getDetalle())
+                        .image(imagenProducto.getUrl())
+                        .setScaleType(BaseSliderView.ScaleType.Fit)
+                        .setOnSliderClickListener(this);
+                demoSliderProduct.addSlider(textSliderView);
+            }
+        } else {
+            TextSliderView textSliderView = new TextSliderView(this);
+            textSliderView.description(getResources().getString(R.string.activity_detail_image_noaval))
+                    .image(R.drawable.ic_image_no_aval)
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(this);
+            demoSliderProduct.addSlider(textSliderView);
+        }
+
+
+        demoSliderProduct.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
+        demoSliderProduct.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        demoSliderProduct.setCustomAnimation(new DescriptionAnimation());
+        demoSliderProduct.setDuration(4000);
+        demoSliderProduct.addOnPageChangeListener(this);
+        demoSliderProduct.stopAutoCycle();
+    }
+
+
     private void initComponents(){
+        tvProductTittle = (TextView) findViewById(R.id.tvProductTittle);
+        tvProductPrice = (TextView) findViewById(R.id.tvProductPrice);
+        ivCompanyDet = (ImageView) findViewById(R.id.ivCompanyDet);
+        tvCompanyDet = (TextView) findViewById(R.id.tvCompanyDet);
+
+        productoEmpresa = (ProductoEmpresa) getIntent().getExtras().getSerializable("ProductoEmpresa");
+        demoSliderProduct = (SliderLayout) findViewById(R.id.sldImageProduct);
+
+        tvProductTittle.setText(productoEmpresa.getNombre());
+        tvProductPrice.setText(productoEmpresa.getPrecio().toString()+" Bs");
+        initSwipeRefreshLayout();
+        initActionBar();
+    }
+
+    private void initSwipeRefreshLayout(){
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container_detail);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -67,6 +103,9 @@ public class DetailProductActivity extends AppCompatActivity implements
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    private void initActionBar(){
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);

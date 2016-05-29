@@ -15,6 +15,7 @@
             android:id="@+id/ivProduct"
             android:background="@drawable/border_image"
             android:src="@drawable/ic_collections_black_48dp"
+            android:scaleType="centerCrop"
             android:layout_marginLeft="8dp"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"

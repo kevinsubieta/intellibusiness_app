@@ -6,17 +6,17 @@ import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
  * Created by Subieta on 13/05/2016.
  */
 public class ProductoDescuento extends Entity {
-    int producto;
-    int descuento;
-    Descuento objDescuento;
+    private int producto;
+    private int descuento;
+    private Descuento insDescuento;
 
     public ProductoDescuento() {
     }
 
-    public ProductoDescuento(int producto, int descuento, Descuento objDescuento) {
+    public ProductoDescuento(int producto, int descuento, Descuento insDescuento) {
         this.producto = producto;
         this.descuento = descuento;
-        this.objDescuento = objDescuento;
+        this.insDescuento = insDescuento;
     }
 
     public int getProducto() {
@@ -35,11 +35,11 @@ public class ProductoDescuento extends Entity {
         this.descuento = descuento;
     }
 
-    public Descuento getObjDescuento() {
-        return objDescuento;
+    public Descuento getInsDescuento() {
+        return insDescuento;
     }
 
-    public void setObjDescuento(Descuento objDescuento) {
-        this.objDescuento = objDescuento;
+    public void setInsDescuento(Descuento insDescuento) {
+        this.insDescuento = insDescuento;
     }
 }

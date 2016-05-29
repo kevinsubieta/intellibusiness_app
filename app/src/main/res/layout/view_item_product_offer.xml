@@ -17,6 +17,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:id="@+id/ivImageOffer"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_collections_black_48dp"
             android:background="@drawable/border_image"
             android:layout_centerHorizontal="true" />
@@ -30,7 +31,7 @@
             android:id="@+id/tvDescriptionOffer"
             android:textStyle="bold"
             android:maxLength="20"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_below="@+id/ivImageOffer"
             android:layout_alignLeft="@+id/ivImageOffer"
             android:layout_alignStart="@+id/ivImageOffer" />

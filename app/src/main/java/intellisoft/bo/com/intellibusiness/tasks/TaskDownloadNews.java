@@ -4,9 +4,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import intellisoft.bo.com.intellibusiness.consume.Services;
 import intellisoft.bo.com.intellibusiness.entity.inv.ImagenProducto;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.entity.mark.Descuento;
@@ -37,20 +40,13 @@ public class TaskDownloadNews extends AsyncTask<Void, Void,List<ProductoEmpresa>
     @Override
     protected List<ProductoEmpresa> doInBackground(Void... params) {
         List<ProductoEmpresa> lstProductoEmpresas = new ArrayList<>();
-            for (int i = 0; i<10; i++ ){
-                Descuento descuento = new Descuento("Description: "+i,i,i+1,i,false );
-                ProductoDescuento productoDescuento = new ProductoDescuento(i,i,descuento);
-                ImagenProducto imagenProducto = new ImagenProducto("https://cdn4.iconfinder.com/data/icons/pretty_office_3/256/packing.png");
-
-                List<ProductoDescuento> lstProductoDescuento = new ArrayList<>();
-                lstProductoDescuento.add(productoDescuento);
-
-                List<ImagenProducto> lstImagenProductos = new ArrayList<>();
-                lstImagenProductos.add(imagenProducto);
-                ProductoEmpresa productoEmpresa = new ProductoEmpresa("Soy el producto: "+i,"Terbol","Terbol",1,i,1,"detalle",lstProductoDescuento, lstImagenProductos);
-                lstProductoEmpresas.add(productoEmpresa);
-            }
-        return lstProductoEmpresas;
+        Services services = new Services(context);
+        List<Integer> lstIndex =Arrays.asList(1, 2, 3, 4, 5);
+        lstProductoEmpresas = services.getProductPage(lstIndex);
+        if(lstProductoEmpresas!=null && lstProductoEmpresas.size()>0){
+            return lstProductoEmpresas;
+        }
+        return null;
     }
 
     @Override

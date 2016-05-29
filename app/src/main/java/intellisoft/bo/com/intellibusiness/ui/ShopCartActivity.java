@@ -104,7 +104,7 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
                 break;
             case R.id.action_delete_item:
                 if(!lstShopForDelete.isEmpty()){
-                    new TaskDeleteCart(ShopCartActivity.this,this);
+                    new TaskDeleteCart(ShopCartActivity.this,this).execute();
                 }
                 break;
 
@@ -133,7 +133,7 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
         changeActionBar();
         shopCartAdapter = new ShoppingCartAdapter(ShopCartActivity.this,lstShoppingCarts);
         this.lvShoppingCart.setAdapter(shopCartAdapter);
-        lstShoppingCarts.clear();
+        lstShopForDelete.clear();
 
     }
 

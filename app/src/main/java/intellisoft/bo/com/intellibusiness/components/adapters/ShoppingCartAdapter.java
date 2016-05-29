@@ -58,9 +58,12 @@ public class ShoppingCartAdapter extends BaseAdapter {
         holder.tvPriceProduct = (TextView) convertView.findViewById(R.id.tvPriceProduct);
         holder.cbDelete = (CheckBox) convertView.findViewById(R.id.cbDelete);
 
-       // aQuery.id(holder.ivProduct).image(lstShoppingCarts.get(position).); Imagen principal prod
+        if(lstShoppingCarts.get(position).getProductoEmpresa().getLstImgProducto() !=null &&
+                lstShoppingCarts.get(position).getProductoEmpresa().getLstImgProducto().size()>0){
+            aQuery.id(holder.ivProduct).image(lstShoppingCarts.get(position).getProductoEmpresa().getLstImgProducto().get(0).getUrl());
+        }
         holder.tvNameProduct.setText(lstShoppingCarts.get(position).getProductoEmpresa().getNombre());
-        holder.tvPriceProduct.setText(Double.toString(lstShoppingCarts.get(position).getProductoEmpresa().getPrecio()) + " $u$");
+        holder.tvPriceProduct.setText(lstShoppingCarts.get(position).getProductoEmpresa().getPrecio().toString() + " $u$");
         holder.cbDelete.setVisibility(ShopCartActivity.checkDelete ? View.VISIBLE : View.GONE);
 
         holder.cbDelete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

@@ -15,6 +15,7 @@ import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.entity.mark.Inbox;
 import intellisoft.bo.com.intellibusiness.entity.mark.Notificacion;
+import intellisoft.bo.com.intellibusiness.entity.ven.CarritoProducto;
 
 /**
  * Created by kevin on 21/05/2016.
@@ -84,20 +85,32 @@ public class Services extends Web {
         }
     }
 
-    public List<ProductoEmpresa> getShopCart(int id) {
+    public List<CarritoProducto> getShopCart(int id) {
         String metodo = "/Adm/Cliente/ShopCart/" + id;
         try{
-            return getList(metodo,new TypeToken<ArrayList<ProductoEmpresa>>(){}.getType());
+            return getList(metodo,new TypeToken<ArrayList<CarritoProducto>>(){}.getType());
         }catch(Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
-    public List<ProductoEmpresa> deleteShopCart(List<ProductoEmpresa> lstShopCart){
+    public List<CarritoProducto> deleteShopCart(List<CarritoProducto> lstShopCart){
         String metodo = "/Adm/Cliente/DeleteShopCart";
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put("lstShop",new Gson().toJson(lstShopCart));
+        try{
+            return getListByPost(metodo,params,new TypeToken<ArrayList<CarritoProducto>>(){}.getType());
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+
+    public List<ProductoEmpresa> getProductPage(List<Integer> lstIndex){
+        String metodo = "/Inv/Cliente/ListNews";
+        HashMap<String, Object> params = new HashMap<String, Object>();
+        params.put("lstIndex",new Gson().toJson(lstIndex));
         try{
             return getListByPost(metodo,params,new TypeToken<ArrayList<ProductoEmpresa>>(){}.getType());
         }catch (Exception e){

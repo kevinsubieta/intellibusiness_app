@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     private void initComponents(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container_main);
+        swipeRefreshLayout.setRefreshing(true);
         refreshSwipe();
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -176,6 +177,7 @@ public class MainActivity extends AppCompatActivity
     public void onCorrectDownload(List<ProductoEmpresa> lstProductoEmpresas) {
         this.lstProductoEmpresas = lstProductoEmpresas;
         this.gridViewNews.setAdapter(new NewersAdapter(MainActivity.this,lstProductoEmpresas));
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

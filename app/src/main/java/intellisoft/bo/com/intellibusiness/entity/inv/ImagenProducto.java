@@ -6,13 +6,23 @@ import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
  * Created by Subieta on 13/05/2016.
  */
 public class ImagenProducto extends Entity {
-    String url;
+    private int producto;
+    private String url;
 
     public ImagenProducto() {
     }
 
-    public ImagenProducto(String url) {
+    public ImagenProducto(int producto, String url) {
+        this.producto = producto;
         this.url = url;
+    }
+
+    public int getProducto() {
+        return producto;
+    }
+
+    public void setProducto(int producto) {
+        this.producto = producto;
     }
 
     public String getUrl() {

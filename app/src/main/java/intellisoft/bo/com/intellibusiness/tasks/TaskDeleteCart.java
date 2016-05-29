@@ -8,13 +8,14 @@ import java.util.List;
 import intellisoft.bo.com.intellibusiness.consume.Services;
 import intellisoft.bo.com.intellibusiness.dialogs.LoadingDialog;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.entity.ven.CarritoProducto;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadCart;
 import intellisoft.bo.com.intellibusiness.ui.ShopCartActivity;
 
 /**
  * Created by kevin on 28/05/2016.
  */
-public class TaskDeleteCart extends AsyncTask<Void, Void,List<ProductoEmpresa>> {
+public class TaskDeleteCart extends AsyncTask<Void, Void,List<CarritoProducto>> {
     private Context context;
     private LoadingDialog loadingDialog;
     private OnCompleteDownloadCart onCompleteDownloadCart;
@@ -32,9 +33,9 @@ public class TaskDeleteCart extends AsyncTask<Void, Void,List<ProductoEmpresa>> 
     }
 
     @Override
-    protected List<ProductoEmpresa> doInBackground(Void... params) {
+    protected List<CarritoProducto> doInBackground(Void... params) {
         Services services = new Services(context);
-        List<ProductoEmpresa> lstProductoEmpresas = services.deleteShopCart(ShopCartActivity.lstShopForDelete);
+        List<CarritoProducto> lstProductoEmpresas = services.deleteShopCart(ShopCartActivity.lstShopForDelete);
         if(lstProductoEmpresas!=null){
             return lstProductoEmpresas;
         }
@@ -42,7 +43,7 @@ public class TaskDeleteCart extends AsyncTask<Void, Void,List<ProductoEmpresa>> 
     }
 
     @Override
-    protected void onPostExecute(List<ProductoEmpresa> lstCarts) {
+    protected void onPostExecute(List<CarritoProducto> lstCarts) {
         loadingDialog.dismiss();
         if (lstCarts != null) {
             onCompleteDownloadCart.onCorrectDeleted(lstCarts);

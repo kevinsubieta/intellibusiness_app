@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.androidquery.AQuery;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
@@ -47,22 +48,27 @@ public class NewersAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         HeaderGridViewHolder viewHolder = new HeaderGridViewHolder();
         convertView = LayoutInflater.from(context).inflate(R.layout.view_item_product_offer,null,true);
         viewHolder.ivImageOffer = (ImageView) convertView.findViewById(R.id.ivImageOffer);
         viewHolder.tvDescriptionOffer = (TextView) convertView.findViewById(R.id.tvDescriptionOffer);
         viewHolder.tvPriceNewer = (TextView) convertView.findViewById(R.id.tvPriceNewer);
 
-        aQuery.id(viewHolder.ivImageOffer).image(lstProductoEmpresas.get(position).getLstImagenProducto().get(0).getUrl());
+        if(lstProductoEmpresas.get(position).getLstImgProducto().size()>0 &&
+                lstProductoEmpresas.get(position).getLstImgProducto().get(0).getUrl()!=null){
+            aQuery.id(viewHolder.ivImageOffer).image(lstProductoEmpresas.get(position).getLstImgProducto().get(0).getUrl());
+        }
         viewHolder.tvDescriptionOffer.setText(lstProductoEmpresas.get(position).getNombre());
-        viewHolder.tvPriceNewer.setText(Double.toString(lstProductoEmpresas.get(position).getPrecio()));
+        viewHolder.tvPriceNewer.setText(lstProductoEmpresas.get(position).getPrecio().toString());
 
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, DetailProductActivity.class));
+                Intent intent = new Intent(context, DetailProductActivity.class);
+                intent.putExtra("ProductoEmpresa",lstProductoEmpresas.get(position));
+                context.startActivity(intent);
             }
         });
         return convertView;
