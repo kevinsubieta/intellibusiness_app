@@ -80,10 +80,12 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
     }
 
     private void changeActionBar(){
-        checkDelete = !checkDelete;
-        ibActionDeleted = menuShopCart.findItem(R.id.action_delete_item);
-        ibActionDeleted.setVisible(checkDelete ? true : false);
-        shopCartAdapter.notifyDataSetChanged();
+        if(lstShoppingCarts!=null && lstShoppingCarts.size()>0){
+            checkDelete = !checkDelete;
+            ibActionDeleted = menuShopCart.findItem(R.id.action_delete_item);
+            ibActionDeleted.setVisible(checkDelete ? true : false);
+            shopCartAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

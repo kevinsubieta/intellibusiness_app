@@ -139,7 +139,8 @@
                     style="@style/Buttons_dialog"
                     android:id="@+id/btnBuy"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:onClick="clicBuyProduct" />
 
                 <Button
                     android:layout_width="match_parent"

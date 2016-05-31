@@ -112,10 +112,12 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
     }
 
     private void changeActionBar(){
-        checkDelete = !checkDelete;
-        ibActionDeleted = menuItems.findItem(R.id.action_delete_item);
-        ibActionDeleted.setVisible(checkDelete ? true : false);
-        inboxAdapter.notifyDataSetChanged();
+        if(lstInbox !=null && lstInbox.size()>0){
+            checkDelete = !checkDelete;
+            ibActionDeleted = menuItems.findItem(R.id.action_delete_item);
+            ibActionDeleted.setVisible(checkDelete ? true : false);
+            inboxAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

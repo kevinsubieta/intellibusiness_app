@@ -4,7 +4,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@color/dodgerBlue</item>
+        <item name="android:statusBarColor">@color/dark_navy</item>
     </style>
 
     <style name="Theme_Dialog_Translucent" parent="android:Theme.DeviceDefault.Dialog">

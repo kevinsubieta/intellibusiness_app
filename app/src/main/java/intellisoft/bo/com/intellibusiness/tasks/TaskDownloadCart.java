@@ -32,8 +32,8 @@ public class TaskDownloadCart extends AsyncTask<Void,Void,List<CarritoProducto>>
 
     @Override
     protected void onPreExecute() {
-        swipeRefreshLayout.setRefreshing(true);
         super.onPreExecute();
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override

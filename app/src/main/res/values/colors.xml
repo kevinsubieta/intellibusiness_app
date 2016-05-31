@@ -14,4 +14,11 @@
     <item name="blue_main" type="color">#2196F3</item>
     <item name="blue_accent" type="color">#0CBABA</item>
     <item name="dodgerBlue" type="color">#1E90FF</item>
+
+    <color name="dark_navy">#011A27</color>
+    <color name="blue_berry">#063852</color>
+    <color name="tangerine">#F0810F</color>
+    <color name="daffodil">#E6DF44</color>
+
+
 </resources>

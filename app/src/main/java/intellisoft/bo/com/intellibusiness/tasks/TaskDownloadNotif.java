@@ -32,8 +32,8 @@ public class TaskDownloadNotif extends AsyncTask<Void,Void,List<Inbox>> {
 
     @Override
     protected void onPreExecute() {
-        swipeRefreshLayout.setRefreshing(true);
         super.onPreExecute();
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
