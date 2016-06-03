@@ -11,6 +11,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteRegister;
@@ -29,8 +30,8 @@ public class RegisterDialog extends Dialog implements OnCompleteRegister {
     private EditText etMail;
     private EditText etTelf;
     private EditText etAddress;
-    private EditText etPassword;
-    private EditText etRepeatPassword;
+    private ShowHidePasswordEditText etPassword;
+    private ShowHidePasswordEditText etRepeatPassword;
 
     public RegisterDialog(Context context) {
         super(context, android.R.style.Theme_Holo_Light_Dialog_MinWidth);
@@ -54,8 +55,8 @@ public class RegisterDialog extends Dialog implements OnCompleteRegister {
         this.etMail = (EditText) findViewById(R.id.etMail);
         this.etTelf = (EditText) findViewById(R.id.etTelf);
         this.etAddress = (EditText) findViewById(R.id.etAddress);
-        this.etPassword = (EditText) findViewById(R.id.etPassword);
-        this.etRepeatPassword = (EditText) findViewById(R.id.etRepeatPassword);
+        this.etPassword = (ShowHidePasswordEditText) findViewById(R.id.etPassword);
+        this.etRepeatPassword = (ShowHidePasswordEditText) findViewById(R.id.etRepeatPassword);
 
         (findViewById(R.id.btnDialogok)).setOnClickListener(new View.OnClickListener() {
             @Override

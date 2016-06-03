@@ -13,6 +13,7 @@
     <string name="splash_activity_msjcancel">Splash cancelado, saliendo del app</string>
 
     <string name="activity_login_etUserName">Nombre de usuario</string>
+    <string name="activity_login_etTittle">Inicio de sesión</string>
     <string name="activity_login_btnSignUp">Login</string>
     <string name="activity_login_tvCreateAccount">Crear nueva cuenta</string>
     <string name="activity_login_msjError">Datos incorrectos</string>

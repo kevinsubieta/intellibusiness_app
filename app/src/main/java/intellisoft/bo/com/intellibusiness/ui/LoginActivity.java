@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
+
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.dialogs.LoadingDialog;
 import intellisoft.bo.com.intellibusiness.dialogs.RegisterDialog;
@@ -28,7 +30,7 @@ public class LoginActivity extends Activity implements OnCompleteLogin {
     private LoadingDialog loadingDialog;
     private TaskLoginUser taskLoginUser;
     private EditText la_etUserName;
-    private EditText la_etPassUser;
+    private ShowHidePasswordEditText la_etPassUser;
 
     private final String TAG = "intellisoft.bo.com.intellibusiness.ui.LoginActivity";
     @Override
@@ -49,7 +51,7 @@ public class LoginActivity extends Activity implements OnCompleteLogin {
 
     private void initComponentes(){
         this.la_etUserName = (EditText) findViewById(R.id.la_etUserName);
-        this.la_etPassUser = (EditText) findViewById(R.id.la_etPassUser);
+        this.la_etPassUser = (ShowHidePasswordEditText) findViewById(R.id.la_etPassUser);
     }
 
     public void clcCreateNewAccount(View view){

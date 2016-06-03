@@ -2,42 +2,47 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_berry"
 >
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/dark_navy"
+
         android:scaleType="centerCrop"
         android:id="@+id/imageView" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/blue_berry"
         android:layout_marginBottom="100dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-
-        android:background="@color/white"
         android:layout_marginTop="100dp"
         android:layout_gravity="center">
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:inputType="textPersonName"
+            android:background="@drawable/border_textview"
             android:ems="10"
+            android:padding="5dp"
+            android:textSize="20dp"
             android:id="@+id/la_etUserName"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="64dp" />
+            android:layout_marginTop="70dp" />
 
-        <EditText
+        <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/border_textview"
             android:inputType="textPassword"
+            android:padding="5dp"
             android:ems="10"
             android:id="@+id/la_etPassUser"
             android:layout_marginTop="30dp"
@@ -47,11 +52,11 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="@string/activity_login_btnSignUp"
             android:id="@+id/la_btnSignUp"
-            android:layout_marginTop="32dp"
-            style="@style/Buttons_dialog"
+            android:layout_marginTop="20dp"
+            style="@style/Buttons_activity"
             android:onClick="clcBtnSignUp"
             android:layout_below="@+id/la_etPassUser"
             android:layout_centerHorizontal="true" />
@@ -62,10 +67,21 @@
             android:text="@string/activity_login_tvCreateAccount"
             android:id="@+id/la_tvCreateAccount"
             android:onClick="clcCreateNewAccount"
+            style="@style/TextViews_activityTextView"
             android:layout_below="@+id/la_btnSignUp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/activity_login_etTittle"
+            style="@style/TextViews_activityTittle"
+            android:id="@+id/textView"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
 
     </RelativeLayout>
