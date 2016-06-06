@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -31,12 +32,16 @@ import java.util.List;
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.inv.ImagenProducto;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.listeners.OnCompleteAddShop;
+import intellisoft.bo.com.intellibusiness.listeners.OnCompleteSaveBuy;
+import intellisoft.bo.com.intellibusiness.tasks.TaskAddShopCart;
+import intellisoft.bo.com.intellibusiness.tasks.TaskSaveBuy;
 
 /**
  * Created by Subieta on 16/05/2016.
  */
 public class DetailProductActivity extends AppCompatActivity implements
-        BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
+        BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, OnCompleteAddShop,OnCompleteSaveBuy {
 
     private SliderLayout demoSliderProduct;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -152,6 +157,10 @@ public class DetailProductActivity extends AppCompatActivity implements
         startActivityForResult(intent, REQUEST_CODE_PAYMENT);
     }
 
+    public void clicAddShopCart(View view){
+        new TaskAddShopCart(DetailProductActivity.this,this,productoEmpresa).execute();
+    }
+
 
     private PayPalPayment getThingToBuy(String paymentIntent) {
         return new PayPalPayment(productoEmpresa.getPrecio(), "USD", productoEmpresa.getNombre(),
@@ -167,6 +176,19 @@ public class DetailProductActivity extends AppCompatActivity implements
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE_FUTURE_PAYMENT){
+            if(resultCode == RESULT_OK){
+                new TaskSaveBuy(DetailProductActivity.this,this,productoEmpresa).execute();
+            }else{
+                this.onErrorSaveBuy();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -187,5 +209,29 @@ public class DetailProductActivity extends AppCompatActivity implements
     @Override
     public void onSliderClick(BaseSliderView slider) {
 
+    }
+
+    @Override
+    public void onCorrectAddCart(Boolean result) {
+        Toast.makeText(DetailProductActivity.this,getResources().getString(R.string.activity_detail_product_msjAddShop),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onErrorAddCart() {
+        Toast.makeText(DetailProductActivity.this,getResources().getString(R.string.activity_detail_product_msjErrorAddShop),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCompleteSaveBuy(Boolean result) {
+        Toast.makeText(DetailProductActivity.this,getResources().getString(R.string.activity_detail_product_msjOkBuy),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onErrorSaveBuy() {
+        Toast.makeText(DetailProductActivity.this,getResources().getString(R.string.activity_detail_product_msjErrorBuy),
+                Toast.LENGTH_SHORT).show();
     }
 }

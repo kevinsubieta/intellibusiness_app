@@ -66,6 +66,12 @@
     <string name="activity_detail_product_tvQuantity"> Cantidad: </string>
     <string name="activity_detail_product_tvCategory"> Categoría: </string>
     <string name="activity_detail_product_tvCorp"> Información del vendedor: </string>
+    <string name="activity_detail_product_msjAddShop"> Se añadió el producto al carrito completamente. </string>
+    <string name="activity_detail_product_msjErrorAddShop"> Error al añadir el producto al carrito. </string>
+    <string name="activity_detail_product_msjOkBuy"> Compra realizada correctamente </string>
+    <string name="activity_detail_product_msjErrorBuy"> Error al realizar la compra. Intente más tarde. </string>
+    <string name="activity_detail_product_msjErrorDownloadProd"> Error al descargar producto. Intente más tarde. </string>
+
 
     <string name="activity_inbox_tittle"> Notificaciones </string>
 

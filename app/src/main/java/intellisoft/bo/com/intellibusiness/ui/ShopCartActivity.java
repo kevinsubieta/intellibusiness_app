@@ -1,5 +1,6 @@
 package intellisoft.bo.com.intellibusiness.ui;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -7,8 +8,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +23,15 @@ import intellisoft.bo.com.intellibusiness.entity.app.ShoppingCart;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.entity.ven.CarritoProducto;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadCart;
+import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadProd;
 import intellisoft.bo.com.intellibusiness.tasks.TaskDeleteCart;
 import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadCart;
+import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadProduct;
 
 /**
  * Created by Subieta on 13/05/2016.
  */
-public class ShopCartActivity extends AppCompatActivity implements OnCompleteDownloadCart {
+public class ShopCartActivity extends AppCompatActivity implements OnCompleteDownloadCart, OnCompleteDownloadProd {
 
     private SwipeRefreshLayout swipe_container_shopcart;
     private List<CarritoProducto> lstShoppingCarts;
@@ -61,6 +67,13 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
             upArrow.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
             getSupportActionBar().setHomeAsUpIndicator(upArrow);
         }
+
+        lvShoppingCart.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                new TaskDownloadProduct(ShopCartActivity.this,ShopCartActivity.this,lstShoppingCarts.get(position).getIdp()).execute();
+            }
+        });
     }
 
     @Override
@@ -149,5 +162,18 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
 
                 break;
         }
+    }
+
+    @Override
+    public void onCompleteDownload(ProductoEmpresa productoEmpresa) {
+        Intent intent = new Intent(ShopCartActivity.this,DetailProductActivity.class);
+        intent.putExtra("ProductoEmpresa",productoEmpresa);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onErrorDownload() {
+        Toast.makeText(ShopCartActivity.this,getResources().
+                getString(R.string.activity_detail_product_msjErrorDownloadProd), Toast.LENGTH_LONG).show();
     }
 }

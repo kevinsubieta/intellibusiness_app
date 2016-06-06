@@ -2,11 +2,15 @@ package intellisoft.bo.com.intellibusiness.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.IntentCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -17,11 +21,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
@@ -43,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     private String TAG = "MainActivity";
     private PreferencesManager preferencesManager;
     private Usuario usuario;
+    private SimpleCursorAdapter busStopCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,8 +136,60 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
+        makeSercherProducts(menu);
         return true;
     }
+
+    private void makeSercherProducts(Menu menu){
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+        String[] columnNames = {"_id","text"};
+        MatrixCursor cursor = new MatrixCursor(columnNames);
+        String[] array = {"item1","item2","item3"};//if strings are in resources
+        String[] temp = new String[2];
+        int id = 0;
+        for(String item : array){
+            temp[0] = Integer.toString(id++);
+            temp[1] = item;
+            cursor.addRow(temp);
+        }
+        String[] from = {"text"};
+        int[] to = {R.id.tvTittleNotif};
+        busStopCursorAdapter = new SimpleCursorAdapter(MainActivity.this, R.layout.view_item_inbox, cursor, from, to,0);
+        searchView.setSuggestionsAdapter(busStopCursorAdapter);
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+
+            @Override
+            public boolean onSuggestionClick(int position) {
+//                String selectedItem = (String)busStopCursorAdapter.getItem(position);
+                Toast.makeText(MainActivity.this,"onSuggestionClick",Toast.LENGTH_SHORT).show();
+       //         Log.v("search view", selectedItem);
+                return false;
+            }
+
+            @Override
+            public boolean onSuggestionSelect(int position) {
+                Toast.makeText(MainActivity.this,"onSuggestionSelect",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(MainActivity.this,"ok",Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Toast.makeText(MainActivity.this,"ok",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -114,6 +115,34 @@ public class Services extends Web {
         try{
             return getListByPost(metodo,params,new TypeToken<ArrayList<ProductoEmpresa>>(){}.getType());
         }catch (Exception e){
+            return null;
+        }
+    }
+
+    public boolean saveProductToShopCart(int idc, int idp){
+        String metodo = "/Ven/Cliente/SaveShopCart/"+idc+"/"+idp;
+        try{
+            return (boolean) getObject(metodo,Boolean.class);
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean saveBuyClient(int cliente, int producto, BigDecimal monto){
+        String metodo = "/Ven/Cliente/SaveSale/"+cliente+"/"+producto+"/"+monto;
+        try{
+            return (boolean) getObject(metodo,Boolean.class);
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public ProductoEmpresa getProductById(int id) {
+        String metodo = "/Inv/Cliente/GetProduct/"+id;
+        try{
+            return get(metodo,ProductoEmpresa.class);
+        }catch(Exception e){
+            e.printStackTrace();
             return null;
         }
     }

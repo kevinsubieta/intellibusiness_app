@@ -18,6 +18,7 @@ import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.app.ShoppingCart;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.entity.ven.CarritoProducto;
+import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadProduct;
 import intellisoft.bo.com.intellibusiness.ui.ShopCartActivity;
 
 /**
@@ -78,6 +79,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
                 }
             }
         });
+
         return convertView;
     }
 
