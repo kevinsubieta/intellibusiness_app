@@ -31,6 +31,7 @@ import com.androidquery.AQuery;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity
 
     private intellisoft.bo.com.intellibusiness.components.gridviews.HeaderGridView gridViewNews;
     private List<ProductoEmpresa> lstProductoEmpresas;
+    private List<ProductoEmpresa> lstProductosBuscados;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressbar;
     private String TAG = "MainActivity";
@@ -175,9 +177,9 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public boolean onSuggestionClick(int position) {
-//                String selectedItem = (String)busStopCursorAdapter.getItem(position);
-                Toast.makeText(MainActivity.this,"onSuggestionClick",Toast.LENGTH_SHORT).show();
-       //         Log.v("search view", selectedItem);
+                Intent intent = new Intent(MainActivity.this,ProductActivity.class);
+                intent.putExtra("lstProductosBuscados", (Serializable) lstProductosBuscados);
+                startActivity(intent);
                 return false;
             }
 
@@ -205,6 +207,7 @@ public class MainActivity extends AppCompatActivity
 
     private List<Suggestion> loadSuggestions(String texto){
         List<Suggestion> suggestions = new ArrayList<>();
+        lstProductosBuscados = new ArrayList<>();
         if(lstProductoEmpresas==null){
             return null;
         }
@@ -214,6 +217,7 @@ public class MainActivity extends AppCompatActivity
             }
             ProductoEmpresa productoEmpresa = lstProductoEmpresas.get(i);
             if( productoEmpresa.getNombre().toUpperCase().startsWith(texto.toUpperCase())){
+                lstProductosBuscados.add(productoEmpresa);
                 suggestions.add(new Suggestion(productoEmpresa.getId(),
                         productoEmpresa.getNombre(),productoEmpresa.getPrecio().toString()));
             }

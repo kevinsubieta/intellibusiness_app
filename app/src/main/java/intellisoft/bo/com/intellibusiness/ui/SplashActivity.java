@@ -40,7 +40,7 @@ public class SplashActivity extends AwesomeSplash implements OnCompleteSplash{
         //Choose LOGO OR PATH; if you don't provide String value for path it's logo by default
 
         //Customize Logo
-        configSplash.setLogoSplash(R.drawable.icon_ib4); //or any other drawable
+        configSplash.setLogoSplash(R.drawable.ic_splash_launcher); //or any other drawable
         configSplash.setAnimLogoSplashDuration(1800); //int ms
         configSplash.setAnimLogoSplashTechnique(Techniques.DropOut); //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 

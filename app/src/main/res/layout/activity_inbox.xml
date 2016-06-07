@@ -12,6 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/activity_MsjErrorLoading"
         android:id="@+id/tvTittleError"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:textSize="18dp"
         android:visibility="gone"

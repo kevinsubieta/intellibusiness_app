@@ -12,18 +12,19 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/listView"
-            tools:listitem="@layout/view_item_shopcart"
-            android:layout_gravity="center_horizontal" />
-
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/swipe_container_main"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lvProducts"
+                tools:listitem="@layout/view_item_shopcart"
+                android:paddingTop="55dp"
+                android:layout_gravity="center_horizontal" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>

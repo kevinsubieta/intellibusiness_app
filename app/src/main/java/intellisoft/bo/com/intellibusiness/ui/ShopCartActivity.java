@@ -36,7 +36,7 @@ import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadProduct;
 /**
  * Created by Subieta on 13/05/2016.
  */
-public class ShopCartActivity extends AppCompatActivity implements OnCompleteDownloadCart, OnCompleteDownloadProd {
+public class ShopCartActivity extends AppCompatActivity implements OnCompleteDownloadCart {
 
     private SwipeRefreshLayout swipe_container_shopcart;
     private List<CarritoProducto> lstShoppingCarts;
@@ -80,13 +80,6 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
             getSupportActionBar().setHomeAsUpIndicator(upArrow);
         }
 
-        lvShoppingCart.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                loadingDialog.show();
-                new TaskDownloadProduct(ShopCartActivity.this,ShopCartActivity.this,lstShoppingCarts.get(position).getIdp()).execute();
-            }
-        });
     }
 
     @Override
@@ -180,18 +173,4 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
         }
     }
 
-    @Override
-    public void onCompleteDownload(ProductoEmpresa productoEmpresa) {
-        loadingDialog.dismiss();
-        Intent intent = new Intent(ShopCartActivity.this,DetailProductActivity.class);
-        intent.putExtra("ProductoEmpresa",productoEmpresa);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onErrorDownload() {
-        loadingDialog.dismiss();
-        Toast.makeText(ShopCartActivity.this,getResources().
-                getString(R.string.activity_detail_product_msjErrorDownloadProd), Toast.LENGTH_LONG).show();
-    }
 }

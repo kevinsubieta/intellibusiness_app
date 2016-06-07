@@ -17,6 +17,7 @@ import java.util.List;
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.ui.DetailProductActivity;
+import intellisoft.bo.com.intellibusiness.utils.AppStatics;
 
 /**
  * Created by kevin on 13/05/2016.
@@ -60,7 +61,7 @@ public class NewersAdapter extends BaseAdapter {
             aQuery.id(viewHolder.ivImageOffer).image(lstProductoEmpresas.get(position).getLstImgProducto().get(0).getUrl());
         }
         viewHolder.tvDescriptionOffer.setText(lstProductoEmpresas.get(position).getNombre());
-        viewHolder.tvPriceNewer.setText(lstProductoEmpresas.get(position).getPrecio().toString());
+        viewHolder.tvPriceNewer.setText(lstProductoEmpresas.get(position).getPrecio().toString()+" "+ AppStatics.MONEDA);
 
 
         convertView.setOnClickListener(new View.OnClickListener() {

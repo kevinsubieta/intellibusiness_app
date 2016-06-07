@@ -55,7 +55,7 @@
             android:name=".ui.ProductActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppActionBarTheme">
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity

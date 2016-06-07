@@ -74,11 +74,11 @@ public class RegisterDialog extends Dialog implements OnCompleteRegister {
     }
 
     private void initRegister(){
-        if(validateText(etUserName) && validateNumbers(etCI) && validateText(etName)
+        if(validateText(etUserName) && validateWhiteSpace(etUserName)  && validateNumbers(etCI) && validateText(etName)
                 && validateText(etLastName) && validateEmail(etMail) && validateNumbers(etTelf)
                 && validateText(etAddress) && verifyPasswords(etPassword,etRepeatPassword)){
 
-            Usuario usuario = new Usuario(etUserName.getText().toString(),
+            Usuario usuario = new Usuario(etUserName.getText().toString().trim(),
                                         etPassword.getText().toString(),
                                         Integer.parseInt(etCI.getText().toString()),
                                         etName.getText().toString(),
@@ -96,6 +96,10 @@ public class RegisterDialog extends Dialog implements OnCompleteRegister {
 
     private boolean validateText(EditText editText){
         return editText.getText().toString() !="" ? true : false;
+    }
+
+    private boolean validateWhiteSpace(EditText editText){
+        return !editText.getText().toString().contains(" ") ? true : false;
     }
 
     private boolean validateNumbers(EditText editText){

@@ -1,6 +1,7 @@
 package intellisoft.bo.com.intellibusiness.components.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import intellisoft.bo.com.intellibusiness.entity.app.ShoppingCart;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.entity.ven.CarritoProducto;
 import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadProduct;
+import intellisoft.bo.com.intellibusiness.ui.DetailProductActivity;
 import intellisoft.bo.com.intellibusiness.ui.ShopCartActivity;
 
 /**
@@ -77,6 +79,15 @@ public class ShoppingCartAdapter extends BaseAdapter {
                         ShopCartActivity.lstShopForDelete.add(lstShoppingCarts.get(position));
                     }
                 }
+            }
+        });
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailProductActivity.class);
+                intent.putExtra("ProductoEmpresa",lstShoppingCarts.get(position).getProductoEmpresa());
+                context.startActivity(intent);
             }
         });
 
