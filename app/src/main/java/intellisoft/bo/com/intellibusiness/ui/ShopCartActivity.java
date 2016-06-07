@@ -12,13 +12,18 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.components.adapters.ShoppingCartAdapter;
+import intellisoft.bo.com.intellibusiness.dialogs.LoadingDialog;
 import intellisoft.bo.com.intellibusiness.entity.app.ShoppingCart;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.entity.ven.CarritoProducto;
@@ -42,6 +47,9 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
     private MenuItem ibActionDeleted;
     private ShoppingCartAdapter shopCartAdapter;
     public static boolean checkDelete;
+    private ProgressBar pbLoadingShopCart;
+    private TextView tvTittleError;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +65,12 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
         this.lvShoppingCart = (ListView) findViewById(R.id.lvShoppingCart);
         this.swipe_container_shopcart = (SwipeRefreshLayout) findViewById(R.id.swipe_container_shopcart);
         this.lvShoppingCart = (ListView) findViewById(R.id.lvShoppingCart);
+        this.pbLoadingShopCart = (ProgressBar) findViewById(R.id.pbLoadingShopCart);
+        this.tvTittleError = (TextView) findViewById(R.id.tvTittleError);
+        this.loadingDialog = new LoadingDialog(ShopCartActivity.this);
         refreshSwipe();
 
+        pbLoadingShopCart.setVisibility(View.VISIBLE);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
@@ -71,6 +83,7 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
         lvShoppingCart.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                loadingDialog.show();
                 new TaskDownloadProduct(ShopCartActivity.this,ShopCartActivity.this,lstShoppingCarts.get(position).getIdp()).execute();
             }
         });
@@ -129,6 +142,8 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
 
     @Override
     public void onCorrectDownload(List<CarritoProducto> lstShoppingCarts) {
+        pbLoadingShopCart.setVisibility(View.GONE);
+        tvTittleError.setVisibility(View.GONE);
         this.lstShoppingCarts = lstShoppingCarts;
         this.shopCartAdapter = new ShoppingCartAdapter(ShopCartActivity.this,lstShoppingCarts);
         this.lvShoppingCart.setAdapter(shopCartAdapter);
@@ -156,7 +171,8 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
     public void onErrorDownload(int type) {
         switch (type){
             case 1:
-
+                pbLoadingShopCart.setVisibility(View.GONE);
+                tvTittleError.setVisibility(View.VISIBLE);
                 break;
             case 2:
 
@@ -166,6 +182,7 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
 
     @Override
     public void onCompleteDownload(ProductoEmpresa productoEmpresa) {
+        loadingDialog.dismiss();
         Intent intent = new Intent(ShopCartActivity.this,DetailProductActivity.class);
         intent.putExtra("ProductoEmpresa",productoEmpresa);
         startActivity(intent);
@@ -173,6 +190,7 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
 
     @Override
     public void onErrorDownload() {
+        loadingDialog.dismiss();
         Toast.makeText(ShopCartActivity.this,getResources().
                 getString(R.string.activity_detail_product_msjErrorDownloadProd), Toast.LENGTH_LONG).show();
     }

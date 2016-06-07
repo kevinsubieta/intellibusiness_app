@@ -33,8 +33,8 @@ public class TaskDownloadNews extends AsyncTask<Void, Void,List<ProductoEmpresa>
 
     @Override
     protected void onPreExecute() {
-        swipeRefreshLayout.setRefreshing(true);
         super.onPreExecute();
+        swipeRefreshLayout.setRefreshing(true);
     }
 
     @Override

@@ -181,7 +181,7 @@ public class DetailProductActivity extends AppCompatActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE_FUTURE_PAYMENT){
+        if(requestCode == REQUEST_CODE_PAYMENT){
             if(resultCode == RESULT_OK){
                 new TaskSaveBuy(DetailProductActivity.this,this,productoEmpresa).execute();
             }else{

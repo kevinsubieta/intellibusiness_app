@@ -23,10 +23,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +39,11 @@ import intellisoft.bo.com.intellibusiness.components.adapters.NewersAdapter;
 import intellisoft.bo.com.intellibusiness.components.gridviews.HeaderGridView;
 import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.entity.inv.Suggestion;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteDownloadNews;
 import intellisoft.bo.com.intellibusiness.tasks.TaskDownloadNews;
 import intellisoft.bo.com.intellibusiness.tasks.TaskRegisterGcm;
+import intellisoft.bo.com.intellibusiness.utils.AppStatics;
 import intellisoft.bo.com.intellibusiness.utils.PreferencesManager;
 
 public class MainActivity extends AppCompatActivity
@@ -47,10 +52,13 @@ public class MainActivity extends AppCompatActivity
     private intellisoft.bo.com.intellibusiness.components.gridviews.HeaderGridView gridViewNews;
     private List<ProductoEmpresa> lstProductoEmpresas;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressbar;
     private String TAG = "MainActivity";
     private PreferencesManager preferencesManager;
     private Usuario usuario;
     private SimpleCursorAdapter busStopCursorAdapter;
+    private SearchView searchView;
+    private TextView tvTittleError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +67,17 @@ public class MainActivity extends AppCompatActivity
         initComponents();
         new TaskRegisterGcm(MainActivity.this).execute();
         new TaskDownloadNews(MainActivity.this,this,swipeRefreshLayout).execute();
-
-
     }
 
     private void initComponents(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container_main);
-        swipeRefreshLayout.setRefreshing(true);
         refreshSwipe();
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        this.progressbar = (ProgressBar) findViewById(R.id.pbLoadingNewers);
+        this.progressbar.setVisibility(View.VISIBLE);
         this.gridViewNews = (HeaderGridView) findViewById(R.id.hgvNews);
+        this.tvTittleError = (TextView) findViewById(R.id.tvTittleError);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,8 +94,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        HeaderGridView headerGridView = (HeaderGridView) findViewById(R.id.hgvNews);
-
         preferencesManager = new PreferencesManager(MainActivity.this);
         usuario = preferencesManager.getUsuario();
         if(usuario!= null){
@@ -103,6 +108,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private void refreshSwipe() {
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container_main);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -136,27 +142,34 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
-        makeSercherProducts(menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        makeSercherProducts(searchView);
         return true;
     }
 
-    private void makeSercherProducts(Menu menu){
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+    public void makeSercherProducts(final SearchView searchView){
 
-        String[] columnNames = {"_id","text"};
+        List<Suggestion> suggestionsList = loadSuggestions(searchView.getQuery().toString());
+        String[] columnNames = {"_id","nombre","precio"};
         MatrixCursor cursor = new MatrixCursor(columnNames);
-        String[] array = {"item1","item2","item3"};//if strings are in resources
-        String[] temp = new String[2];
-        int id = 0;
-        for(String item : array){
-            temp[0] = Integer.toString(id++);
-            temp[1] = item;
-            cursor.addRow(temp);
+        String[] temp = new String[3];
+        if(suggestionsList != null){
+            for(Suggestion suggestion : suggestionsList){
+                temp[0] = Integer.toString(suggestion.getId());
+                temp[1] = suggestion.getNombre();
+                temp[2] = suggestion.getPrice() + AppStatics.MONEDA;
+                cursor.addRow(temp);
+            }
+        }else{
+            temp[0] = "0";
+            temp[1] = "No se pudieron cargar datos de la busqueda";
+            temp[2] = "0.0 Bs";
         }
-        String[] from = {"text"};
-        int[] to = {R.id.tvTittleNotif};
-        busStopCursorAdapter = new SimpleCursorAdapter(MainActivity.this, R.layout.view_item_inbox, cursor, from, to,0);
+
+        String[] from = {"nombre","precio"};
+        int[] to = {R.id.tvTittleSuggestion,R.id.tvPriceSuggestion};
+        busStopCursorAdapter = new SimpleCursorAdapter(MainActivity.this, R.layout.view_item_suggestion, cursor, from, to,0);
         searchView.setSuggestionsAdapter(busStopCursorAdapter);
         searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
 
@@ -184,10 +197,28 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Toast.makeText(MainActivity.this,"ok",Toast.LENGTH_SHORT).show();
-                return false;
+                makeSercherProducts(searchView);
+                return true;
             }
         });
+    }
+
+    private List<Suggestion> loadSuggestions(String texto){
+        List<Suggestion> suggestions = new ArrayList<>();
+        if(lstProductoEmpresas==null){
+            return null;
+        }
+        for(int i = 0; i<lstProductoEmpresas.size(); i++){
+            if(suggestions.size()==3){
+                return suggestions;
+            }
+            ProductoEmpresa productoEmpresa = lstProductoEmpresas.get(i);
+            if( productoEmpresa.getNombre().toUpperCase().startsWith(texto.toUpperCase())){
+                suggestions.add(new Suggestion(productoEmpresa.getId(),
+                        productoEmpresa.getNombre(),productoEmpresa.getPrecio().toString()));
+            }
+        }
+        return suggestions;
     }
 
 
@@ -236,6 +267,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onCorrectDownload(List<ProductoEmpresa> lstProductoEmpresas) {
         this.lstProductoEmpresas = lstProductoEmpresas;
+        this.progressbar.setVisibility(View.GONE);
+        this.tvTittleError.setVisibility(View.GONE);
         this.gridViewNews.setAdapter(new NewersAdapter(MainActivity.this,lstProductoEmpresas));
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -243,6 +276,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onErrorDownload() {
         this.lstProductoEmpresas = null;
+        this.progressbar.setVisibility(View.GONE);
+        this.tvTittleError.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setRefreshing(false);
     }
 }

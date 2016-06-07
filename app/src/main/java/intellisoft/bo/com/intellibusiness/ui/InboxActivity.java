@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,8 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
     private MenuItem ibActionDeleted;
     private Menu menuItems;
     private CheckBox cbItems;
+    private ProgressBar pbLoadingInbox;
+    private TextView tvTittleError;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +58,9 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
         this.lvInbox = (ListView) findViewById(R.id.lvInbox);
         this.swipe_container_inbox = (SwipeRefreshLayout) findViewById(R.id.swipe_container_inbox);
         this.cbItems = (CheckBox) findViewById(R.id.cbDelete);
+        this.pbLoadingInbox = (ProgressBar) findViewById(R.id.pbLoadingInbox);
+        this.pbLoadingInbox.setVisibility(View.VISIBLE);
+        this.tvTittleError = (TextView) findViewById(R.id.tvTittleError);
         refreshSwipe();
 
 
@@ -123,6 +130,7 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
     @Override
     public void onCorrectDownload(List<Inbox> lstNotifications) {
         this.lstInbox = lstNotifications;
+        this.pbLoadingInbox.setVisibility(View.GONE);
         inboxAdapter = new InboxAdapter(InboxActivity.this,lstInbox);
         this.lvInbox.setAdapter(inboxAdapter);
     }
@@ -131,7 +139,8 @@ public class InboxActivity extends AppCompatActivity implements OnCompleteDownlo
     public void onErrorDownload(int type) {
         switch (type){
         case 1:
-
+            this.pbLoadingInbox.setVisibility(View.GONE);
+            this.tvTittleError.setVisibility(View.VISIBLE);
         break;
             case 2:
 
