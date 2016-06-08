@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidquery.AQuery;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -36,6 +37,7 @@ import intellisoft.bo.com.intellibusiness.listeners.OnCompleteAddShop;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteSaveBuy;
 import intellisoft.bo.com.intellibusiness.tasks.TaskAddShopCart;
 import intellisoft.bo.com.intellibusiness.tasks.TaskSaveBuy;
+import intellisoft.bo.com.intellibusiness.utils.AppStatics;
 
 /**
  * Created by Subieta on 16/05/2016.
@@ -50,6 +52,7 @@ public class DetailProductActivity extends AppCompatActivity implements
     private TextView tvProductPrice;
     private ImageView ivCompanyDet;
     private TextView tvCompanyDet;
+
 
 
     private static final String CONFIG_ENVIRONMENT = PayPalConfiguration.ENVIRONMENT_NO_NETWORK;
@@ -120,6 +123,8 @@ public class DetailProductActivity extends AppCompatActivity implements
 
         tvProductTittle.setText(productoEmpresa.getNombre());
         tvProductPrice.setText(productoEmpresa.getPrecio().toString()+" Bs");
+        (new AQuery(DetailProductActivity.this)).id(ivCompanyDet).image(productoEmpresa.getInsEmpresa().getLogo());
+        tvCompanyDet.setText(productoEmpresa.getInsEmpresa().getNombre());
         initSwipeRefreshLayout();
         initActionBar();
     }
@@ -163,7 +168,7 @@ public class DetailProductActivity extends AppCompatActivity implements
 
 
     private PayPalPayment getThingToBuy(String paymentIntent) {
-        return new PayPalPayment(productoEmpresa.getPrecio(), "USD", productoEmpresa.getNombre(),
+        return new PayPalPayment(productoEmpresa.getPrecio(). multiply(AppStatics.TIPO_CAMBIO) , "USD", productoEmpresa.getNombre(),
                 paymentIntent);
     }
 

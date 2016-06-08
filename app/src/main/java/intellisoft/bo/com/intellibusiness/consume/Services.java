@@ -128,8 +128,8 @@ public class Services extends Web {
         }
     }
 
-    public boolean saveBuyClient(int cliente, int producto, BigDecimal monto){
-        String metodo = "/Ven/Cliente/SaveSale/"+cliente+"/"+producto+"/"+monto;
+    public boolean saveBuyClient(int cliente, int producto,BigDecimal precio, BigDecimal costo, int cantidad ){
+        String metodo = "/Ven/Cliente/SaveSale/"+cliente+"/"+producto+"/"+precio+"/"+costo+"/"+cantidad;
         try{
             return (boolean) getObject(metodo,Boolean.class);
         }catch (Exception e){

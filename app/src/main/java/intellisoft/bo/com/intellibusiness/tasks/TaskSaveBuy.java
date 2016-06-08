@@ -35,7 +35,8 @@ public class TaskSaveBuy extends AsyncTask<Void,Void,Boolean> {
         Services services = new Services(context);
         try {
             Usuario cliente = new PreferencesManager(context).getUsuario();
-            return services.saveBuyClient(cliente.getId(),productoEmpresa.getProducto(),productoEmpresa.getPrecio());
+            return services.saveBuyClient(cliente.getId(),productoEmpresa.getProducto(),productoEmpresa.getPrecio(),
+                    productoEmpresa.getCosto(),1);
         }catch (Exception e){
             return false;
         }
