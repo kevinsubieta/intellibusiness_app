@@ -36,8 +36,8 @@ public abstract class Web {
 	private final String TAG = "ServiceConsume";
 	private boolean hasConnection = false;
 	private Context context;
-	public static String WEB_SERVER = "http://192.168.0.103:8680/ServicioWS/Services";
-//	public static String WEB_SERVER = "http://54.191.255.20:8680/ServicioWS/Services";
+//	public static String WEB_SERVER = "http://192.168.0.103:8680/ServicioWS/Services";
+	public static String WEB_SERVER = "http://54.191.255.20:8680/ServicioWS/Services";
 	private static String APP_USER = "";
 	private static String APP_PASSWORD = "";
 	private static final Integer TIMEOUT_CONNECTION = 30;
