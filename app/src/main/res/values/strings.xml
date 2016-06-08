@@ -78,5 +78,13 @@
     <string name="activity_MsjErrorLoading"> Error en la conexión, intente más tarde. </string>
     <string name="activity_shopcart_tittle"> Carrito de compras </string>
 
+    <!-- Strings ACRA -->
+    <string name="crash_toast_text">¡Lo sentimos! Ocurrio un problema con Intelli Business. Por favor reportalo a los desarrolladores para que lo solucionen</string>
+    <string name="crash_dialog_title">Intelli Business tuvo un problema</string>
+    <string name="crash_dialog_text">Un error inesperado ocurrio forzando a la aplicación a detenerse. Por Favor ayudanos enviando los datos del error pulsando en Aceptar.</string>
+    <string name="crash_dialog_comment_prompt">Agrega tus comentarios acerca del problema :v </string>
+    <string name="crash_dialog_ok_toast">Gracias por ayudarnos!</string>
+    <string name="crash_user_email_label">Si deseas ingresa tu correo para contactarte:</string>
+
 
 </resources>

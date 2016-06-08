@@ -33,4 +33,10 @@
     </style>
 
 
+    <style name="MyActivityDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:listSelector">#00000000</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+
 </resources>

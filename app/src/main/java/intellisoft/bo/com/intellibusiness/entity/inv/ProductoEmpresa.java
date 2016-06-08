@@ -32,10 +32,10 @@ public class ProductoEmpresa extends Entity {
     public ProductoEmpresa() {
     }
 
-    public ProductoEmpresa(int producto, int empresa, String nombre,
-                           int cantidad, BigDecimal precio, BigDecimal costo,
-                           BigDecimal fechalanzamiento, int estado, String detalle,
-                           boolean oferta, List<ImagenProducto> lstImgProducto,
+    public ProductoEmpresa(int producto, int empresa,
+                           String nombre, int cantidad, BigDecimal precio,
+                           BigDecimal costo, BigDecimal fechalanzamiento, int estado,
+                           String detalle, boolean oferta, List<ImagenProducto> lstImgProducto,
                            List<ProductoDescuento> lstProductoDes, Producto insProducto, Empresa insEmpresa) {
         this.producto = producto;
         this.empresa = empresa;

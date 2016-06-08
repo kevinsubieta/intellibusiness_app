@@ -33,6 +33,9 @@ import java.util.List;
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.inv.ImagenProducto;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
+import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEscalar;
+import intellisoft.bo.com.intellibusiness.entity.inv.ProductoNumerica;
+import intellisoft.bo.com.intellibusiness.entity.inv.ValorEscalar;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteAddShop;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteSaveBuy;
 import intellisoft.bo.com.intellibusiness.tasks.TaskAddShopCart;
@@ -52,6 +55,7 @@ public class DetailProductActivity extends AppCompatActivity implements
     private TextView tvProductPrice;
     private ImageView ivCompanyDet;
     private TextView tvCompanyDet;
+    private TextView tvState;
 
 
 
@@ -117,14 +121,42 @@ public class DetailProductActivity extends AppCompatActivity implements
         tvProductPrice = (TextView) findViewById(R.id.tvProductPrice);
         ivCompanyDet = (ImageView) findViewById(R.id.ivCompanyDet);
         tvCompanyDet = (TextView) findViewById(R.id.tvCompanyDet);
+        tvState = (TextView) findViewById(R.id.tvState);
 
         productoEmpresa = (ProductoEmpresa) getIntent().getExtras().getSerializable("ProductoEmpresa");
         demoSliderProduct = (SliderLayout) findViewById(R.id.sldImageProduct);
 
         tvProductTittle.setText(productoEmpresa.getNombre());
         tvProductPrice.setText(productoEmpresa.getPrecio().toString()+" Bs");
-        (new AQuery(DetailProductActivity.this)).id(ivCompanyDet).image(productoEmpresa.getInsEmpresa().getLogo());
-        tvCompanyDet.setText(productoEmpresa.getInsEmpresa().getNombre());
+        if(productoEmpresa!=null){
+            if(productoEmpresa.getInsEmpresa().getLogo()!=null){
+                (new AQuery(DetailProductActivity.this)).id(ivCompanyDet).image(productoEmpresa.getInsEmpresa().getLogo());
+            }
+            tvCompanyDet.setText(productoEmpresa.getInsEmpresa().getNombre());
+        }
+        List<ProductoEscalar> lstProductoEscalar = productoEmpresa.getInsProducto().getLstProductoEscalar();
+        List<ProductoNumerica> lstProductoNumerica = productoEmpresa.getInsProducto().getLstProductoNumerica();
+
+        if(lstProductoEscalar!= null && !lstProductoEscalar.isEmpty()){
+            for(ProductoEscalar productoEscalar : lstProductoEscalar){
+                if(productoEscalar.getInsValorEscalar()!=null){
+                    for(ValorEscalar valorEscalar : productoEscalar.getInsValorEscalar()){
+                        if(valorEscalar.getInsEscalar()!=null){
+                            tvState.setText(valorEscalar.getInsEscalar().getNombre()+" : "+ valorEscalar.getValor()+"\n");
+                        }
+                    }
+                }
+            }
+        }
+
+        if(lstProductoNumerica!=null && !lstProductoNumerica.isEmpty()){
+            for(ProductoNumerica productoNumerica : lstProductoNumerica){
+                if(productoNumerica.getNumerica()!=null){
+                    tvState.setText(productoNumerica.getNumerica().getNombre()+" : " + productoNumerica.getValor()+"\n");
+                }
+            }
+        }
+
         initSwipeRefreshLayout();
         initActionBar();
     }
