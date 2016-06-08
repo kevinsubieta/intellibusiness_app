@@ -241,6 +241,28 @@
                     android:layout_toEndOf="@+id/ivCompanyDet" />
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/activity_detail_product_tvQuatity"
+                android:paddingTop="8dp"
+                android:id="@+id/tvQuatity"
+                android:layout_alignTop="@+id/tvProductPrice"
+                android:layout_toEndOf="@+id/tvCorp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/etQuantity"
+                android:gravity="center"
+                android:text="1"
+                android:layout_alignBottom="@+id/tvProductPrice"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/tvQuatity" />
+
         </RelativeLayout>
 
     </ScrollView>

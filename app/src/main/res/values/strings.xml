@@ -71,6 +71,7 @@
     <string name="activity_detail_product_msjOkBuy"> Compra realizada correctamente </string>
     <string name="activity_detail_product_msjErrorBuy"> Error al realizar la compra. Intente más tarde. </string>
     <string name="activity_detail_product_msjErrorDownloadProd"> Error al descargar producto. Intente más tarde. </string>
+    <string name="activity_detail_product_tvQuatity"> Cantidad: </string>
 
 
     <string name="activity_inbox_tittle"> Notificaciones </string>

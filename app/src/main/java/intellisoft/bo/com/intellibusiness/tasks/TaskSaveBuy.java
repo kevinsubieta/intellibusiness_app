@@ -17,12 +17,14 @@ public class TaskSaveBuy extends AsyncTask<Void,Void,Boolean> {
     private Context context;
     private OnCompleteSaveBuy onCompleteSaveBuy;
     private ProductoEmpresa productoEmpresa;
+    private int cantidad;
 
 
-    public TaskSaveBuy(Context context, OnCompleteSaveBuy onCompleteSaveBuy, ProductoEmpresa productoEmpresa) {
+    public TaskSaveBuy(Context context, OnCompleteSaveBuy onCompleteSaveBuy, ProductoEmpresa productoEmpresa,int cantidad) {
         this.context = context;
         this.onCompleteSaveBuy = onCompleteSaveBuy;
         this.productoEmpresa = productoEmpresa;
+        this.cantidad = cantidad;
     }
 
     @Override
@@ -36,7 +38,7 @@ public class TaskSaveBuy extends AsyncTask<Void,Void,Boolean> {
         try {
             Usuario cliente = new PreferencesManager(context).getUsuario();
             return services.saveBuyClient(cliente.getId(),productoEmpresa.getProducto(),productoEmpresa.getPrecio(),
-                    productoEmpresa.getCosto(),1);
+                    productoEmpresa.getCosto(),cantidad);
         }catch (Exception e){
             return false;
         }

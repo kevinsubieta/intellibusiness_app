@@ -1,5 +1,6 @@
 package intellisoft.bo.com.intellibusiness.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -8,10 +9,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Selection;
+import android.text.Spannable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,12 +27,14 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.paypal.android.sdk.ca;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
@@ -56,6 +63,7 @@ public class DetailProductActivity extends AppCompatActivity implements
     private ImageView ivCompanyDet;
     private TextView tvCompanyDet;
     private TextView tvState;
+    private EditText etQuantity;
 
 
 
@@ -122,7 +130,11 @@ public class DetailProductActivity extends AppCompatActivity implements
         ivCompanyDet = (ImageView) findViewById(R.id.ivCompanyDet);
         tvCompanyDet = (TextView) findViewById(R.id.tvCompanyDet);
         tvState = (TextView) findViewById(R.id.tvState);
+        etQuantity = (EditText) findViewById(R.id.etQuantity);
 
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
         productoEmpresa = (ProductoEmpresa) getIntent().getExtras().getSerializable("ProductoEmpresa");
         demoSliderProduct = (SliderLayout) findViewById(R.id.sldImageProduct);
 
@@ -137,12 +149,13 @@ public class DetailProductActivity extends AppCompatActivity implements
         List<ProductoEscalar> lstProductoEscalar = productoEmpresa.getInsProducto().getLstProductoEscalar();
         List<ProductoNumerica> lstProductoNumerica = productoEmpresa.getInsProducto().getLstProductoNumerica();
 
+        String description = "";
         if(lstProductoEscalar!= null && !lstProductoEscalar.isEmpty()){
             for(ProductoEscalar productoEscalar : lstProductoEscalar){
                 if(productoEscalar.getInsValorEscalar()!=null){
                     for(ValorEscalar valorEscalar : productoEscalar.getInsValorEscalar()){
                         if(valorEscalar.getInsEscalar()!=null){
-                            tvState.setText(valorEscalar.getInsEscalar().getNombre()+" : "+ valorEscalar.getValor()+"\n");
+                            description += valorEscalar.getInsEscalar().getNombre()+" : "+ valorEscalar.getValor()+"\n";
                         }
                     }
                 }
@@ -152,10 +165,11 @@ public class DetailProductActivity extends AppCompatActivity implements
         if(lstProductoNumerica!=null && !lstProductoNumerica.isEmpty()){
             for(ProductoNumerica productoNumerica : lstProductoNumerica){
                 if(productoNumerica.getNumerica()!=null){
-                    tvState.setText(productoNumerica.getNumerica().getNombre()+" : " + productoNumerica.getValor()+"\n");
+                    description += productoNumerica.getNumerica().getNombre()+" : " + productoNumerica.getValor()+"\n";
                 }
             }
         }
+        tvState.setText(description);
 
         initSwipeRefreshLayout();
         initActionBar();
@@ -200,7 +214,17 @@ public class DetailProductActivity extends AppCompatActivity implements
 
 
     private PayPalPayment getThingToBuy(String paymentIntent) {
-        return new PayPalPayment(productoEmpresa.getPrecio(). multiply(AppStatics.TIPO_CAMBIO) , "USD", productoEmpresa.getNombre(),
+        int cantidad = 1;
+        if(etQuantity.getText().toString().equals("") || etQuantity.getText().toString().equals("0") || etQuantity.getText().equals(" ")){
+            cantidad = 1;
+        }else{
+           cantidad = Integer.parseInt(etQuantity.getText().toString());
+        }
+        BigDecimal price = productoEmpresa.getPrecio().divide(AppStatics.TIPO_CAMBIO,2, RoundingMode.CEILING);
+        price = price.multiply(new BigDecimal(cantidad));
+
+        return new PayPalPayment(price ,
+                "USD", productoEmpresa.getNombre()+" X"+Integer.toString(cantidad),
                 paymentIntent);
     }
 
@@ -220,7 +244,7 @@ public class DetailProductActivity extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_PAYMENT){
             if(resultCode == RESULT_OK){
-                new TaskSaveBuy(DetailProductActivity.this,this,productoEmpresa).execute();
+                new TaskSaveBuy(DetailProductActivity.this,this,productoEmpresa,Integer.parseInt(etQuantity.getText().toString())).execute();
             }else{
                 this.onErrorSaveBuy();
             }
