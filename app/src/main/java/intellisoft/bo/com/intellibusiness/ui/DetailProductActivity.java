@@ -137,17 +137,23 @@ public class DetailProductActivity extends AppCompatActivity implements
         );
         productoEmpresa = (ProductoEmpresa) getIntent().getExtras().getSerializable("ProductoEmpresa");
         demoSliderProduct = (SliderLayout) findViewById(R.id.sldImageProduct);
+        List<ProductoEscalar> lstProductoEscalar=null;
+        List<ProductoNumerica> lstProductoNumerica=null;
 
         tvProductTittle.setText(productoEmpresa.getNombre());
         tvProductPrice.setText(productoEmpresa.getPrecio().toString()+" Bs");
         if(productoEmpresa!=null){
-            if(productoEmpresa.getInsEmpresa().getLogo()!=null){
-                (new AQuery(DetailProductActivity.this)).id(ivCompanyDet).image(productoEmpresa.getInsEmpresa().getLogo());
+            if(productoEmpresa.getInsEmpresa()!=null) {
+                if (productoEmpresa.getInsEmpresa().getLogo() != null) {
+                    (new AQuery(DetailProductActivity.this)).id(ivCompanyDet).image(productoEmpresa.getInsEmpresa().getLogo());
+                }
+                tvCompanyDet.setText(productoEmpresa.getInsEmpresa().getNombre());
             }
-            tvCompanyDet.setText(productoEmpresa.getInsEmpresa().getNombre());
+            if(productoEmpresa.getInsProducto()!=null){
+                productoEmpresa.getInsProducto().getLstProductoEscalar();
+                productoEmpresa.getInsProducto().getLstProductoNumerica();
+            }
         }
-        List<ProductoEscalar> lstProductoEscalar = productoEmpresa.getInsProducto().getLstProductoEscalar();
-        List<ProductoNumerica> lstProductoNumerica = productoEmpresa.getInsProducto().getLstProductoNumerica();
 
         String description = "";
         if(lstProductoEscalar!= null && !lstProductoEscalar.isEmpty()){

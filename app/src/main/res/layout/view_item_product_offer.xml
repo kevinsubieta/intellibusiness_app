@@ -13,6 +13,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="180dp"
+            android:maxHeight="180dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
@@ -33,7 +34,6 @@
             android:maxLength="20"
             android:textSize="18dp"
             android:layout_below="@+id/ivImageOffer"
-            android:layout_alignLeft="@+id/ivImageOffer"
             android:layout_alignStart="@+id/ivImageOffer" />
 
         <TextView
