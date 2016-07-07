@@ -12,6 +12,7 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import intellisoft.bo.com.intellibusiness.R;
+import intellisoft.bo.com.intellibusiness.ui.InboxActivity;
 import intellisoft.bo.com.intellibusiness.ui.MainActivity;
 import intellisoft.bo.com.intellibusiness.utils.AppStatics;
 
@@ -26,7 +27,7 @@ public class GcmReceiveMessage extends GcmListenerService {
     }
 
     private void sendNotification(Bundle message) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, InboxActivity.class);
         intent.putExtra("message", message.getString("message"));
         intent.putExtra("obj", message.getString("obj"));
         intent.putExtra("type", message.getString("type"));
@@ -37,11 +38,13 @@ public class GcmReceiveMessage extends GcmListenerService {
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
+        String[] split = message.split("@@");
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
-        mBuilder.setSmallIcon(R.drawable.ic_carrito);
-        mBuilder.setContentTitle(getString(R.string.app_name));
-        mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(message));
-        mBuilder.setContentText(message);
+        mBuilder.setSmallIcon(R.drawable.ic_new_launcher);
+        mBuilder.setContentTitle(split[0]);
+        mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText(split[1]));
+        mBuilder.setContentText(split[1]);
         mBuilder.setContentIntent(contentIntent);
         mBuilder.setAutoCancel(true);
         Notification note = mBuilder.build();

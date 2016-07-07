@@ -1,6 +1,5 @@
 package intellisoft.bo.com.intellibusiness.components.adapters;
 
-import android.app.Notification;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +15,8 @@ import com.androidquery.AQuery;
 import java.util.List;
 
 import intellisoft.bo.com.intellibusiness.R;
-import intellisoft.bo.com.intellibusiness.entity.app.Notifications;
+import intellisoft.bo.com.intellibusiness.dialogs.NotificationDialog;
 import intellisoft.bo.com.intellibusiness.entity.mark.Inbox;
-import intellisoft.bo.com.intellibusiness.entity.mark.Notificacion;
 import intellisoft.bo.com.intellibusiness.ui.InboxActivity;
 
 /**
@@ -55,7 +53,7 @@ public class InboxAdapter extends BaseAdapter {
         HeaderGridViewHolder viewHolder = new HeaderGridViewHolder();
         convertView = LayoutInflater.from(context).inflate(R.layout.view_item_inbox,null,true);
         viewHolder.ivImageNotif = (ImageView) convertView.findViewById(R.id.ivImageNotif);
-        viewHolder.tvTittleNotif = (TextView) convertView.findViewById(R.id.tvTittleNotif);
+        viewHolder.tvTittleNotif = (TextView) convertView.findViewById(R.id.tvTittleDialog);
         viewHolder.tvDateNotif = (TextView) convertView.findViewById(R.id.tvDateNotif);
         viewHolder.cbDelete = (CheckBox) convertView.findViewById(R.id.cbDelete);
 
@@ -68,6 +66,23 @@ public class InboxAdapter extends BaseAdapter {
             viewHolder.tvTittleNotif.setText(lstInbox.get(position).getNotification().getImagen());
          //   viewHolder.tvDateNotif.setText(lstNotifications.get(position).getFecha());
         }
+        if(!InboxActivity.checkDelete){
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NotificationDialog notificationDialog = new NotificationDialog(context,
+                            lstInbox.get(position).getNotification().getTitulo(),
+                            lstInbox.get(position).getNotification().getTexto(),
+                            lstInbox.get(position).getNotification().getImagen());
+                    notificationDialog.show();
+                }
+            });
+        } else {
+            convertView.setOnClickListener(null);
+        }
+
+
+
         viewHolder.cbDelete.setVisibility(InboxActivity.checkDelete ? View.VISIBLE : View.GONE);
 
         viewHolder.cbDelete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

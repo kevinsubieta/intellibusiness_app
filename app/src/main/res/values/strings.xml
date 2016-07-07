@@ -88,4 +88,6 @@
     <string name="crash_user_email_label">Si deseas ingresa tu correo para contactarte:</string>
 
 
+    <string name="notification_dialog"> Esta es una forma de hacer marketing mediante la plataforma comercial de IntelliBusiness </string>
+
 </resources>
