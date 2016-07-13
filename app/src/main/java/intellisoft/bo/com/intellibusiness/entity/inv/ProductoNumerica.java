@@ -7,18 +7,18 @@ import intellisoft.bo.com.intellibusiness.entity.Principal.Entity;
  */
 public class ProductoNumerica extends Entity {
     private int producto;
-    private int propiedadnumerica;
+    private int numerica;
     private double valor;
-    private Numerica numerica;
+    private Numerica insNumerica;
 
     public ProductoNumerica() {
     }
 
-    public ProductoNumerica(int producto, int propiedadnumerica, double valor, Numerica numerica) {
+    public ProductoNumerica(int producto, int numerica, double valor, Numerica insNumerica) {
         this.producto = producto;
-        this.propiedadnumerica = propiedadnumerica;
-        this.valor = valor;
         this.numerica = numerica;
+        this.valor = valor;
+        this.insNumerica = insNumerica;
     }
 
     public int getProducto() {
@@ -29,12 +29,12 @@ public class ProductoNumerica extends Entity {
         this.producto = producto;
     }
 
-    public int getPropiedadnumerica() {
-        return propiedadnumerica;
+    public int getNumerica() {
+        return numerica;
     }
 
-    public void setPropiedadnumerica(int propiedadnumerica) {
-        this.propiedadnumerica = propiedadnumerica;
+    public void setNumerica(int numerica) {
+        this.numerica = numerica;
     }
 
     public double getValor() {
@@ -45,11 +45,11 @@ public class ProductoNumerica extends Entity {
         this.valor = valor;
     }
 
-    public Numerica getNumerica() {
-        return numerica;
+    public Numerica getInsNumerica() {
+        return insNumerica;
     }
 
-    public void setNumerica(Numerica numerica) {
-        this.numerica = numerica;
+    public void setInsNumerica(Numerica insNumerica) {
+        this.insNumerica = insNumerica;
     }
 }

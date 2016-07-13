@@ -56,7 +56,8 @@ public class NewersAdapter extends BaseAdapter {
         viewHolder.tvDescriptionOffer = (TextView) convertView.findViewById(R.id.tvDescriptionOffer);
         viewHolder.tvPriceNewer = (TextView) convertView.findViewById(R.id.tvPriceNewer);
 
-        if(lstProductoEmpresas.get(position).getLstImgProducto().size()>0 &&
+        if(lstProductoEmpresas.get(position).getLstImgProducto()!=null
+                && lstProductoEmpresas.get(position).getLstImgProducto().size()>0 &&
                 lstProductoEmpresas.get(position).getLstImgProducto().get(0).getUrl()!=null){
             aQuery.id(viewHolder.ivImageOffer).image(lstProductoEmpresas.get(position).getLstImgProducto().get(0).getUrl());
         }

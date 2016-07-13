@@ -150,8 +150,8 @@ public class DetailProductActivity extends AppCompatActivity implements
                 tvCompanyDet.setText(productoEmpresa.getInsEmpresa().getNombre());
             }
             if(productoEmpresa.getInsProducto()!=null){
-                productoEmpresa.getInsProducto().getLstProductoEscalar();
-                productoEmpresa.getInsProducto().getLstProductoNumerica();
+                lstProductoEscalar = productoEmpresa.getInsProducto().getLstProductoEscalar();
+                lstProductoNumerica = productoEmpresa.getInsProducto().getLstProductoNumerica();
             }
         }
 
@@ -170,8 +170,8 @@ public class DetailProductActivity extends AppCompatActivity implements
 
         if(lstProductoNumerica!=null && !lstProductoNumerica.isEmpty()){
             for(ProductoNumerica productoNumerica : lstProductoNumerica){
-                if(productoNumerica.getNumerica()!=null){
-                    description += productoNumerica.getNumerica().getNombre()+" : " + productoNumerica.getValor()+"\n";
+                if(productoNumerica.getInsNumerica()!=null){
+                    description += productoNumerica.getInsNumerica().getNombre()+" : " + productoNumerica.getValor()+"\n";
                 }
             }
         }
