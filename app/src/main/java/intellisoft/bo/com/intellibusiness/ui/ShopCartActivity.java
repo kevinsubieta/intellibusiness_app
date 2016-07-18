@@ -147,7 +147,7 @@ public class ShopCartActivity extends AppCompatActivity implements OnCompleteDow
         ArrayList<CarritoProducto> lstAux = new ArrayList<>(lstShoppingCarts);
         for(CarritoProducto cart : lstShoppingCarts){
             for(CarritoProducto cart1 : lstShoppingDel){
-                if(cart.getIdc()==cart1.getIdc() && cart.getIdp()==cart1.getIdp()){
+                if(cart.getCliente()==cart1.getCliente() && cart.getProducto()==cart1.getProducto()){
                     lstAux.remove(cart);
                 }
             }

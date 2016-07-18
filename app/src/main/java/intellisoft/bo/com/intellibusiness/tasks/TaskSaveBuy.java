@@ -3,6 +3,8 @@ package intellisoft.bo.com.intellibusiness.tasks;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.math.BigDecimal;
+
 import intellisoft.bo.com.intellibusiness.consume.Services;
 import intellisoft.bo.com.intellibusiness.entity.adm.Cliente;
 import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
@@ -18,13 +20,15 @@ public class TaskSaveBuy extends AsyncTask<Void,Void,Boolean> {
     private OnCompleteSaveBuy onCompleteSaveBuy;
     private ProductoEmpresa productoEmpresa;
     private int cantidad;
+    BigDecimal precio;
 
 
-    public TaskSaveBuy(Context context, OnCompleteSaveBuy onCompleteSaveBuy, ProductoEmpresa productoEmpresa,int cantidad) {
+    public TaskSaveBuy(Context context, OnCompleteSaveBuy onCompleteSaveBuy, ProductoEmpresa productoEmpresa,int cantidad, BigDecimal precio) {
         this.context = context;
         this.onCompleteSaveBuy = onCompleteSaveBuy;
         this.productoEmpresa = productoEmpresa;
         this.cantidad = cantidad;
+        this.precio = precio;
     }
 
     @Override
@@ -37,7 +41,7 @@ public class TaskSaveBuy extends AsyncTask<Void,Void,Boolean> {
         Services services = new Services(context);
         try {
             Usuario cliente = new PreferencesManager(context).getUsuario();
-            return services.saveBuyClient(cliente.getId(),productoEmpresa.getProducto(),productoEmpresa.getPrecio(),
+            return services.saveBuyClient(cliente.getId(),productoEmpresa.getId(),precio,
                     productoEmpresa.getCosto(),cantidad);
         }catch (Exception e){
             return false;

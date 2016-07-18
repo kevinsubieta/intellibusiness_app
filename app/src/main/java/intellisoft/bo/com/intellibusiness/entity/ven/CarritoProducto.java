@@ -7,36 +7,36 @@ import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
  * Created by kevin on 28/05/2016.
  */
 public class CarritoProducto extends Entity {
-    private int idc;
-    private int idp;
-    private long fecha;
+    private int cliente;
+    private int producto;
+    private int cantidad;
     private ProductoEmpresa productoEmpresa;
 
     public CarritoProducto() {
     }
 
-    public int getIdc() {
-        return idc;
+    public int getCliente() {
+        return cliente;
     }
 
-    public void setIdc(int idc) {
-        this.idc = idc;
+    public void setCliente(int cliente) {
+        this.cliente = cliente;
     }
 
-    public int getIdp() {
-        return idp;
+    public int getProducto() {
+        return producto;
     }
 
-    public void setIdp(int idp) {
-        this.idp = idp;
+    public void setProducto(int producto) {
+        this.producto = producto;
     }
 
-    public long getFecha() {
-        return fecha;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setFecha(long fecha) {
-        this.fecha = fecha;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public ProductoEmpresa getProductoEmpresa() {

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -55,6 +56,8 @@ public class NewersAdapter extends BaseAdapter {
         viewHolder.ivImageOffer = (ImageView) convertView.findViewById(R.id.ivImageOffer);
         viewHolder.tvDescriptionOffer = (TextView) convertView.findViewById(R.id.tvDescriptionOffer);
         viewHolder.tvPriceNewer = (TextView) convertView.findViewById(R.id.tvPriceNewer);
+        viewHolder.rlDescuento = (RelativeLayout) convertView.findViewById(R.id.rlDescuento);
+        viewHolder.tvDescuento = (TextView) convertView.findViewById(R.id.tvDesc);
 
         if(lstProductoEmpresas.get(position).getLstImgProducto()!=null
                 && lstProductoEmpresas.get(position).getLstImgProducto().size()>0 &&
@@ -63,6 +66,14 @@ public class NewersAdapter extends BaseAdapter {
         }
         viewHolder.tvDescriptionOffer.setText(lstProductoEmpresas.get(position).getNombre());
         viewHolder.tvPriceNewer.setText(lstProductoEmpresas.get(position).getPrecio().toString()+" "+ AppStatics.MONEDA);
+
+        if(lstProductoEmpresas.get(position).getLstProductoDes()!=null &&
+                lstProductoEmpresas.get(position).getLstProductoDes().size() >0 ){
+            viewHolder.rlDescuento.setVisibility(View.VISIBLE);
+            viewHolder.tvDescuento.setText("-"+lstProductoEmpresas.get(position).getLstProductoDes().
+                                            get(lstProductoEmpresas.get(position).getLstProductoDes().size()-1).
+                                            getInsDescuento().getPorcentaje()+"%");
+        }
 
 
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -80,5 +91,7 @@ public class NewersAdapter extends BaseAdapter {
         ImageView ivImageOffer;
         TextView tvDescriptionOffer;
         TextView tvPriceNewer;
+        RelativeLayout rlDescuento;
+        TextView tvDescuento;
     }
 }

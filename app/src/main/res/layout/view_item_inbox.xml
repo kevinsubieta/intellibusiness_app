@@ -27,8 +27,7 @@
             android:id="@+id/tvTittleDialog"
             android:textSize="18dp"
             android:layout_marginLeft="10dp"
-            android:layout_alignTop="@+id/ivImageNotif"
-            android:layout_toRightOf="@+id/ivImageNotif"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/ivImageNotif" />
 
         <TextView
@@ -38,6 +37,7 @@
             android:text="Medium Text"
             android:id="@+id/tvDateNotif"
             android:textSize="14dp"
+            android:visibility="gone"
             android:layout_marginLeft="10dp"
             android:layout_below="@+id/tvTittleDialog"
             android:layout_toRightOf="@+id/ivImageNotif"

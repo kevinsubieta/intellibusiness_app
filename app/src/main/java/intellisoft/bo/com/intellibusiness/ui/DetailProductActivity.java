@@ -2,6 +2,7 @@ package intellisoft.bo.com.intellibusiness.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.List;
 
@@ -64,6 +67,9 @@ public class DetailProductActivity extends AppCompatActivity implements
     private TextView tvCompanyDet;
     private TextView tvState;
     private EditText etQuantity;
+    private RelativeLayout rlDescuento;
+    private TextView tvDescuento;
+    private TextView tvPriceAnt;
 
 
 
@@ -73,6 +79,8 @@ public class DetailProductActivity extends AppCompatActivity implements
     private static final int REQUEST_CODE_PAYMENT = 1;
     private static final int REQUEST_CODE_FUTURE_PAYMENT = 2;
     private static final int REQUEST_CODE_PROFILE_SHARING = 3;
+    private boolean descuento = false;
+    private BigDecimal precioDescuento;
 
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(CONFIG_ENVIRONMENT)
@@ -131,6 +139,10 @@ public class DetailProductActivity extends AppCompatActivity implements
         tvCompanyDet = (TextView) findViewById(R.id.tvCompanyDet);
         tvState = (TextView) findViewById(R.id.tvState);
         etQuantity = (EditText) findViewById(R.id.etQuantity);
+        rlDescuento = (RelativeLayout) findViewById(R.id.rlDescuento);
+        tvDescuento = (TextView) findViewById(R.id.tvDesc);
+        tvPriceAnt = (TextView) findViewById(R.id.tvPriceAnt);
+        tvPriceAnt.setPaintFlags(tvPriceAnt.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
@@ -140,8 +152,7 @@ public class DetailProductActivity extends AppCompatActivity implements
         List<ProductoEscalar> lstProductoEscalar=null;
         List<ProductoNumerica> lstProductoNumerica=null;
 
-        tvProductTittle.setText(productoEmpresa.getNombre());
-        tvProductPrice.setText(productoEmpresa.getPrecio().toString()+" Bs");
+
         if(productoEmpresa!=null){
             if(productoEmpresa.getInsEmpresa()!=null) {
                 if (productoEmpresa.getInsEmpresa().getLogo() != null) {
@@ -153,6 +164,29 @@ public class DetailProductActivity extends AppCompatActivity implements
                 lstProductoEscalar = productoEmpresa.getInsProducto().getLstProductoEscalar();
                 lstProductoNumerica = productoEmpresa.getInsProducto().getLstProductoNumerica();
             }
+
+            if(productoEmpresa.getLstProductoDes()!=null &&
+                    productoEmpresa.getLstProductoDes().size() >0 ){
+                descuento = true;
+               rlDescuento.setVisibility(View.VISIBLE);
+                int descuento = productoEmpresa.getLstProductoDes().get(productoEmpresa.getLstProductoDes().size()-1).
+                                                                                    getInsDescuento().getPorcentaje();
+                tvDescuento.setText("-"+descuento+"%");
+                tvProductTittle.setText(productoEmpresa.getNombre());
+                BigDecimal valorDescontar = (productoEmpresa.getPrecio().multiply(new BigDecimal(descuento)))
+                                                                        .divide(new BigDecimal(100));
+                String newValor = productoEmpresa.getPrecio().subtract(valorDescontar).toString();
+                precioDescuento = new BigDecimal(newValor);
+                tvProductPrice.setText(precioDescuento+" $u$");
+                tvPriceAnt.setVisibility(View.VISIBLE);
+                tvPriceAnt.setText(productoEmpresa.getPrecio().toString()+" $u$");
+
+
+            } else {
+                tvProductTittle.setText(productoEmpresa.getNombre());
+                tvProductPrice.setText(productoEmpresa.getPrecio().toString()+" $u$");
+            }
+
         }
 
         String description = "";
@@ -226,7 +260,13 @@ public class DetailProductActivity extends AppCompatActivity implements
         }else{
            cantidad = Integer.parseInt(etQuantity.getText().toString());
         }
-        BigDecimal price = productoEmpresa.getPrecio().divide(AppStatics.TIPO_CAMBIO,2, RoundingMode.CEILING);
+
+        BigDecimal price;
+        if(descuento){
+            price = precioDescuento;
+        } else {
+            price = productoEmpresa.getPrecio();
+        }
         price = price.multiply(new BigDecimal(cantidad));
 
         return new PayPalPayment(price ,
@@ -250,7 +290,14 @@ public class DetailProductActivity extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == REQUEST_CODE_PAYMENT){
             if(resultCode == RESULT_OK){
-                new TaskSaveBuy(DetailProductActivity.this,this,productoEmpresa,Integer.parseInt(etQuantity.getText().toString())).execute();
+                BigDecimal price;
+                if(descuento){
+                    price = precioDescuento;
+                } else {
+                    price = productoEmpresa.getPrecio();
+                }
+
+                new TaskSaveBuy(DetailProductActivity.this,this,productoEmpresa,Integer.parseInt(etQuantity.getText().toString()),price).execute();
             }else{
                 this.onErrorSaveBuy();
             }

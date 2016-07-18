@@ -26,7 +26,7 @@
             android:background="@drawable/border_image"
             >
 
-                    <com.daimajia.slider.library.SliderLayout
+            <com.daimajia.slider.library.SliderLayout
                         android:id="@+id/sldImageProduct"
                         android:layout_width="match_parent"
                         custom:pager_animation="Accordion"
@@ -86,7 +86,7 @@
                         android:id="@+id/tvProductPrice"
                         android:layout_marginTop="15dp"
                         android:layout_marginLeft="10dp"
-                        android:textSize="32dp"
+                        android:textSize="24dp"
                         android:layout_below="@+id/tvProductTittle"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
@@ -121,7 +121,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_below="@+id/tvProductPrice"
@@ -262,6 +262,40 @@
                 android:layout_alignBottom="@+id/tvProductPrice"
                 android:layout_alignParentEnd="true"
                 android:layout_toEndOf="@+id/tvQuatity" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/activity_detail_product_tvProductPrice"
+                android:id="@+id/tvPriceAnt"
+                android:layout_marginLeft="10dp"
+                android:textSize="20dp"
+                android:visibility="gone"
+                android:layout_below="@+id/tvProductPrice"
+                android:layout_toStartOf="@+id/custom_indicator" />
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/rlDescuento"
+                android:visibility="gone"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/ic_descuento"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="-50%"
+                    android:textSize="24dp"
+                    android:textStyle="bold"
+                    android:id="@+id/tvDesc"
+                    android:textColor="@color/white"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
 
         </RelativeLayout>
 

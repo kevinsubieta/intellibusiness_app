@@ -12,6 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 import intellisoft.bo.com.intellibusiness.listeners.OnCompleteRegister;
@@ -79,7 +84,7 @@ public class RegisterDialog extends Dialog implements OnCompleteRegister {
                 && validateText(etAddress) && verifyPasswords(etPassword,etRepeatPassword)){
 
             Usuario usuario = new Usuario(etUserName.getText().toString().trim(),
-                                        etPassword.getText().toString(),
+                                        convertPass(etPassword.getText().toString()),
                                         Integer.parseInt(etCI.getText().toString()),
                                         etName.getText().toString(),
                                         etLastName.getText().toString(),
@@ -92,6 +97,25 @@ public class RegisterDialog extends Dialog implements OnCompleteRegister {
         } else {
           this.onIncorrectRegister();
         }
+    }
+
+    private String convertPass(String pass){
+        return bin2hex(getHash(pass)).toLowerCase();
+    }
+
+    private byte[] getHash(String password) {
+        MessageDigest digest=null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e1) {
+            e1.printStackTrace();
+        }
+        digest.reset();
+        return digest.digest(password.getBytes());
+    }
+
+    static String bin2hex(byte[] data) {
+        return String.format("%0" + (data.length*2) + "X", new BigInteger(1, data));
     }
 
     private boolean validateText(EditText editText){

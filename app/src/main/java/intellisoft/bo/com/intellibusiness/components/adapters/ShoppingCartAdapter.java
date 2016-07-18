@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -60,10 +61,20 @@ public class ShoppingCartAdapter extends BaseAdapter {
         holder.tvNameProduct = (TextView) convertView.findViewById(R.id.tvNameProduct);
         holder.tvPriceProduct = (TextView) convertView.findViewById(R.id.tvPriceProduct);
         holder.cbDelete = (CheckBox) convertView.findViewById(R.id.cbDelete);
+        holder.rlDescuento = (RelativeLayout) convertView.findViewById(R.id.rlDescuento);
+        holder.tvDescuento = (TextView) convertView.findViewById(R.id.tvDesc);
 
         if(lstShoppingCarts.get(position).getProductoEmpresa().getLstImgProducto() !=null &&
                 lstShoppingCarts.get(position).getProductoEmpresa().getLstImgProducto().size()>0){
             aQuery.id(holder.ivProduct).image(lstShoppingCarts.get(position).getProductoEmpresa().getLstImgProducto().get(0).getUrl());
+        }
+
+        if(lstShoppingCarts.get(position).getProductoEmpresa().getLstProductoDes()!=null &&
+                lstShoppingCarts.get(position).getProductoEmpresa().getLstProductoDes().size() >0 ){
+            holder.rlDescuento.setVisibility(View.VISIBLE);
+            holder.tvDescuento.setText("-"+lstShoppingCarts.get(position).getProductoEmpresa().getLstProductoDes().
+                    get(lstShoppingCarts.get(position).getProductoEmpresa().getLstProductoDes().size()-1).
+                    getInsDescuento().getPorcentaje()+"%");
         }
         holder.tvNameProduct.setText(lstShoppingCarts.get(position).getProductoEmpresa().getNombre());
         holder.tvPriceProduct.setText(lstShoppingCarts.get(position).getProductoEmpresa().getPrecio().toString() + " $u$");
@@ -99,5 +110,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
         TextView tvNameProduct;
         TextView tvPriceProduct;
         CheckBox cbDelete;
+        RelativeLayout rlDescuento;
+        TextView tvDescuento;
     }
 }

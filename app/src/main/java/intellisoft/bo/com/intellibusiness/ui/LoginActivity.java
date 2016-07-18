@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.dialogs.LoadingDialog;
 import intellisoft.bo.com.intellibusiness.dialogs.RegisterDialog;
@@ -43,7 +47,7 @@ public class LoginActivity extends Activity implements OnCompleteLogin {
     public void clcBtnSignUp(View view){
         taskLoginUser = new TaskLoginUser(LoginActivity.this, LoginActivity.this,
                                         la_etUserName.getText().toString(),
-                                        la_etPassUser.getText().toString());
+                                        convertPass(la_etPassUser.getText().toString()));
         loadingDialog = new LoadingDialog(this,taskLoginUser,R.style.Theme_Dialog_loading);
         loadingDialog.show();
         taskLoginUser.execute();
@@ -57,6 +61,25 @@ public class LoginActivity extends Activity implements OnCompleteLogin {
     public void clcCreateNewAccount(View view){
         RegisterDialog registerDialog = new RegisterDialog(LoginActivity.this);
         registerDialog.show();
+    }
+
+    private String convertPass(String pass){
+        return bin2hex(getHash(pass)).toLowerCase();
+    }
+
+    private byte[] getHash(String password) {
+        MessageDigest digest=null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e1) {
+            e1.printStackTrace();
+        }
+        digest.reset();
+        return digest.digest(password.getBytes());
+    }
+
+    static String bin2hex(byte[] data) {
+        return String.format("%0" + (data.length*2) + "X", new BigInteger(1, data));
     }
 
 

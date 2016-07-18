@@ -58,5 +58,27 @@
             android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/rlDescuento"
+            android:visibility="gone"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/ic_descuento"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="-50%"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:id="@+id/tvDesc"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

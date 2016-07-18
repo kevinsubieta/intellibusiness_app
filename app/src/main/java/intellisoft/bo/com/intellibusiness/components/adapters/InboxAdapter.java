@@ -59,11 +59,11 @@ public class InboxAdapter extends BaseAdapter {
 
         if(lstInbox.get(position).getNotification().getImagen()!= null){
             aQuery.id(viewHolder.ivImageNotif).image(lstInbox.get(position).getNotification().getImagen());
-            viewHolder.tvTittleNotif.setText(lstInbox.get(position).getNotification().getTexto());
+            viewHolder.tvTittleNotif.setText(lstInbox.get(position).getNotification().getTitulo());
          //   viewHolder.tvDateNotif.setText(lstNotifications.get(position).getFecha());
         } else {
             aQuery.id(viewHolder.ivImageNotif).image(R.drawable.ic_notific_text);
-            viewHolder.tvTittleNotif.setText(lstInbox.get(position).getNotification().getImagen());
+            viewHolder.tvTittleNotif.setText(lstInbox.get(position).getNotification().getTitulo());
          //   viewHolder.tvDateNotif.setText(lstNotifications.get(position).getFecha());
         }
         if(!InboxActivity.checkDelete){
