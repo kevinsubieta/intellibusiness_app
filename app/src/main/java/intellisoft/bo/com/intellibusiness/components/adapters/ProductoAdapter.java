@@ -70,7 +70,7 @@ public class ProductoAdapter extends BaseAdapter {
                 lstProductoEmpresas.get(position).getLstProductoDes().size() >0 ){
             listViewHolder.rlDescuento.setVisibility(View.VISIBLE);
             listViewHolder.tvDescuento.setText("-"+lstProductoEmpresas.get(position).getLstProductoDes().
-                    get(lstProductoEmpresas.get(position).getLstProductoDes().size()-1).
+                    get(0).
                     getInsDescuento().getPorcentaje()+"%");
         }
 

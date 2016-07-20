@@ -71,7 +71,7 @@ public class NewersAdapter extends BaseAdapter {
                 lstProductoEmpresas.get(position).getLstProductoDes().size() >0 ){
             viewHolder.rlDescuento.setVisibility(View.VISIBLE);
             viewHolder.tvDescuento.setText("-"+lstProductoEmpresas.get(position).getLstProductoDes().
-                                            get(lstProductoEmpresas.get(position).getLstProductoDes().size()-1).
+                                            get(0).
                                             getInsDescuento().getPorcentaje()+"%");
         }
 

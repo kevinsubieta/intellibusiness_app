@@ -72,8 +72,7 @@ public class ShoppingCartAdapter extends BaseAdapter {
         if(lstShoppingCarts.get(position).getProductoEmpresa().getLstProductoDes()!=null &&
                 lstShoppingCarts.get(position).getProductoEmpresa().getLstProductoDes().size() >0 ){
             holder.rlDescuento.setVisibility(View.VISIBLE);
-            holder.tvDescuento.setText("-"+lstShoppingCarts.get(position).getProductoEmpresa().getLstProductoDes().
-                    get(lstShoppingCarts.get(position).getProductoEmpresa().getLstProductoDes().size()-1).
+            holder.tvDescuento.setText("-"+lstShoppingCarts.get(position).getProductoEmpresa().getLstProductoDes().get(0).
                     getInsDescuento().getPorcentaje()+"%");
         }
         holder.tvNameProduct.setText(lstShoppingCarts.get(position).getProductoEmpresa().getNombre());

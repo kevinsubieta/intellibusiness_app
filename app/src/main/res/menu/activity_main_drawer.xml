@@ -9,6 +9,7 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
+            android:visible="false"
             android:title="@string/main_drawer_Product" />
         <item
             android:id="@+id/nav_slideshow"
@@ -25,10 +26,12 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
+                android:visible="false"
                 android:title="@string/main_drawer_Category" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_share"
+                android:visible="false"
                 android:title="@string/main_drawer_Enterprise" />
             <item
                 android:id="@+id/nav_logout"
