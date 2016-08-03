@@ -90,4 +90,9 @@
 
     <string name="notification_dialog"> Esta es una forma de hacer marketing mediante la plataforma comercial de IntelliBusiness </string>
 
+    <string name="information_dialog"> Aplicación desarrollada por IntelliSoft </string>
+    <string name="information_dialog_more">Visita nuestra página web</string>
+
+    <string name="information_Tittle"> Información </string>
+
 </resources>

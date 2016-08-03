@@ -38,6 +38,7 @@ import java.util.List;
 import intellisoft.bo.com.intellibusiness.R;
 import intellisoft.bo.com.intellibusiness.components.adapters.NewersAdapter;
 import intellisoft.bo.com.intellibusiness.components.gridviews.HeaderGridView;
+import intellisoft.bo.com.intellibusiness.dialogs.InformationDialog;
 import intellisoft.bo.com.intellibusiness.entity.adm.Usuario;
 import intellisoft.bo.com.intellibusiness.entity.inv.ProductoEmpresa;
 import intellisoft.bo.com.intellibusiness.entity.inv.Suggestion;
@@ -249,7 +250,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
-
+            InformationDialog informationDialog = new InformationDialog(this);
+            informationDialog.show();
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
